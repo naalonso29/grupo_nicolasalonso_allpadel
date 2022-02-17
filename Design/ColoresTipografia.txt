@@ -1,0 +1,10 @@
+Tipografia:
+
+	-Quicksand + Ubuntu Light
+
+Colores:
+
+	#A1F700
+	#616161
+	#8300AB
+	F3F3F3
