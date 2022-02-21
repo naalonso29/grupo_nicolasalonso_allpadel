@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {}
+
+@media (min-width: 768px) and (max-width: 1023px) {}
+
+@media (min-width: 1024px) {}
+
+main {
+    background-color: #f3f3f3;
+}
+
+.producto {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.izq-img {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-content: center;
+}
+
+.izq-img img {
+    width: 80%;
+    height: auto;
+    margin: 10px;
+    border: 2px solid black;
+}
+
+.der-info {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.der-info h1 {
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 9vh;
+    margin-bottom: 4vh;
+    text-align: center;
+    font-size: 45px;
+}
+
+.precio-fav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    font-size: 45px;
+    margin-right: 2vw;
+}
+
+.precio-fav p {
+    font-weight: bold;
+}
+
+.precio-fav i {
+    font-size: 30px;
+}
+
+.datos {
+    list-style: none;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.datos li {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.carrito-compartir {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 2vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.carrito-compartir i {
+    font-size: 30px;
+}
+
+.boton {
+    height: 8vh;
+    width: 18vw;
+    background-color: #A1F700;
+    color: black;
+    border: 1px solid #A1F700;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+}

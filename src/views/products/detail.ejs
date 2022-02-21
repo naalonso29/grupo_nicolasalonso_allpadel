@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+        <link href="/css/detail.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/header.ejs") %>
+
+        <main>
+            <section class="producto">
+                <section class="izq-img">
+                    <img src="/img/paleta1.jpg" alt="FotoProducto">
+                </section>
+                <section class="der-info">
+                    <h1>NOMBRE DEL PRODUCTO</h1>
+                    <article class="precio-fav">
+                        <p>$ 20,000</p>
+                        <i class="far fa-heart"></i>
+                    </article>
+                    <ul class="datos">
+                        <li>Forma: Redonda</li>
+                        <li>Balance: Bajo</li>
+                        <li>Nucleo: Foam importado recubierto por triple lamina de fibra de carbono</li>
+                        <li>Peso: 370</li>
+                    </ul>
+
+                    <article class="carrito-compartir">
+                        <form action="/">
+                            <button type="submit" class="boton">Agregar al Carrito</a></button>
+                        </form>
+                        <i class="fas fa-share-alt"></i>
+                    </article>
+
+                </section>
+            </section>
+        </main>
+
+        <%- include("../partials/footer.ejs") %>
+</body>
+
+</html>
