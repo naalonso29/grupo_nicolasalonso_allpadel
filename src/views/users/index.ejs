@@ -2,14 +2,92 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllPadel</title>
+    <%- include("../partials/head.ejs") %>
+        <link href="/css/index.css" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Esto es el index</h1>
+    <%- include("../partials/header.ejs") %>
+        <main>
+            <section class="banner-container">
+                <img class="main-banner" src="img/banner-home.jpg" alt="Banner">
+            </section>
+
+            <section class="categorias-container">
+                <article class="article-verano">
+                    <section class="textbanner">
+                        <a class="text-btn">Paletas</a>
+                    </section>
+                    <a class="verano" href="#"><img src="/img/paleta.jpg"></a>
+                </article>
+
+                <article class="article-accesorios">
+                    <section class="textbanner">
+                        <a class="text-btn">Pelotas</a>
+                    </section>
+                    <a class="accesorios" href=""><img src="/img/pelota.jpg"></a>
+                </article>
+
+                <article class="article-hombre">
+                    <section class="textbanner">
+                        <a class="text-btn">Bolsos</a>
+                    </section>
+                    <a class="hombre" href=""><img src="/img/bolso.jpg"></a>
+                </article>
+
+                <article class="article-mujer">
+                    <section class="textbanner">
+                        <a class="text-btn">Pistas</a>
+                    </section>
+                    <a class="hombre" href=""><img src="/img/pista.jpg"></a>
+                </article>
+            </section>
+
+            <h1 class="titulo-noticias">NOTICIAS</h1>
+
+            <section class="noticias">
+
+                <article>
+                    <section class="informacion">
+                        <h2>¿Cómo está la lucha por el número 1 del World Padel Tour para esta temporada 2022?</h2>
+                        <p class="texto-noticia">Como en toda competición, las miradas en esta nueva temporada se centran en la lucha por ver quién es el mejor, quién es capaz de alzarse con el número 1, con el primer puesto del ranking World Padel Tour.
+                        </p>
+                    </section>
+                    <a class="hombre" href=""><img src="/img/noticia1.jpg"></a>
+                </article>
+
+                <article>
+                    <section class="informacion">
+                        <h2>Puma anuncia oficialmente su regreso a las pistas de pádel</h2>
+                        <p class="texto-noticia">Accesible a todos los públicos, sin una férrea exigencia física, y con un desarrollo en el que es fácil avanzar y mejorar día a día, el pádel destaca como el deporte más popular en la actualidad a la vez que promueve una serie
+                            de valores con los que PUMA siempre se ha sentido identificada: cooperación, trabajo en equipo y esfuerzo común.
+                        </p>
+                    </section>
+                    <a class="hombre" href=""><img src="/img/noticia2.jpg"></a>
+                </article>
+
+                <article>
+                    <section class="informacion">
+                        <h2>El nuevo circuito mundial de pádel: claves para entender el desembarco qatarí</h2>
+                        <p class="texto-noticia">Qatar, dólares y pádel: el flamante FIP Tour se lanza con fuerte apoyo del fondo de inversión QSI, cuyo presidente es el dueño del PSG.
+                        </p>
+                    </section>
+                    <a class="hombre" href=""><img src="/img/noticia3.jpg"></a>
+                </article>
+
+                <article>
+                    <section class="informacion">
+                        <h2>Nacho Gadea anuncia su adiós del pádel profesional</h2>
+                        <p class="texto-noticia">El pádel profesional vive esta semana otra despedida. Nacho Gadea ha anunciado públicamente su despedida como jugador profesional. De hecho, no estaba inscrito para jugar las previas del Miami Padel Open.
+                        </p>
+                    </section>
+                    <a class="hombre" href=""><img src="/img/noticia4.jpg"></a>
+                </article>
+
+            </section>
+
+        </main>
+        <%- include("../partials/footer.ejs") %>
 </body>
 
 </html>

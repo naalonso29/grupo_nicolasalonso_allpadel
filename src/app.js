@@ -22,6 +22,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
 app.use(express.static(path.resolve(__dirname, '..', 'public')))
 app.use(express.urlencoded({ extended: false }))
 app.use(method('_method'))
