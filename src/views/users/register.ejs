@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+        <link href="/css/register.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/header.ejs") %>
+        <main>
+
+            <h1>Registro</h1>
+
+            <form action="">
+                <section class="registro">
+                    <section class="izq-campos">
+                        <h3>Nombre</h3>
+                        <input type="text" name="nombre" id="nombre" class="campos">
+
+                        <h3>Apellido</h3>
+                        <input type="text" name="apellido" id="apellido" class="campos">
+
+                        <h3>Email</h3>
+                        <input type="email" name="email" id="email" class="campos">
+
+                        <h3>Contraseña</h3>
+                        <input type="password" name="password" id="password" class="campos">
+                    </section>
+
+                    <section class="der-img">
+                        <img src="/img/profiles/default.jpg" alt="">
+                        <div class="file-select" id="src-file1">
+                            <input type="file" name="imageProfile" aria-label="Archivo">
+                        </div>
+                    </section>
+
+                    <section class="btnregistro">
+                        <button type="submit" class="boton">Registrarme</button>
+                    </section>
+
+                </section>
+
+            </form>
+        </main>
+        <%- include("../partials/footer.ejs") %>
+</body>
+
+</html>
