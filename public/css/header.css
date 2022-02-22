@@ -17,7 +17,7 @@
 }
 
 header {
-    background-color: black;
+    background-color: #0F1618;
     color: white;
 }
 
@@ -27,6 +27,7 @@ header i {
 
 header img {
     height: 100%;
+    padding: 20px;
 }
 
 .secHeader {
@@ -43,6 +44,7 @@ header img {
     align-items: center;
     justify-content: center;
     align-content: center;
+    background: linear-gradient(to left, #DC191B, #0F1618);
 }
 
 .secMenu {
@@ -51,6 +53,8 @@ header img {
     display: flex;
     align-content: center;
     align-items: center;
+    background-color: #DC191B;
+    background: linear-gradient(to right, #DC191B, #0F1618);
 }
 
 .secCarrito {

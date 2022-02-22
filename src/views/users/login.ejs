@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+        <link href="/css/login.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/header.ejs") %>
+        <main>
+
+            <form action="">
+                <section class="login">
+
+                    <h1>LOGIN</h1>
+
+                    <h3>Email</h3>
+                    <input type="email" name="email" id="email" class="campos">
+
+                    <h3>Contraseña</h3>
+                    <input type="password" name="password" id="password" class="campos">
+
+                    <article class="checkbox">
+                        <input type="checkbox" name="recuerdame" id="">
+                        <p>Recuerdame</p>
+                    </article>
+
+
+                    <button type="submit" class="boton">Iniciar Sesión</a></button>
+                    <button type="submit" class="botonReg"><a href="/" class="a-boton">Registrarme</a></button>
+                </section>
+            </form>
+
+        </main>
+        <%- include("../partials/footer.ejs") %>
+</body>
+
+</html>

@@ -4,7 +4,7 @@ Tipografia:
 
 Colores:
 
-	#A1F700
-	#616161
-	#8300AB
-	F3F3F3
+	#0f1618	negro
+	#DC191B rojo
+	#FFFFFF	blanco
+	#EDEDED	gris
