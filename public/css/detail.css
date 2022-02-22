@@ -13,7 +13,7 @@
 @media (min-width: 1024px) {}
 
 main {
-    background-color: #f3f3f3;
+    background-color: #EDEDED;
 }
 
 .producto {
@@ -95,9 +95,9 @@ main {
 .boton {
     height: 8vh;
     width: 18vw;
-    background-color: #A1F700;
+    background-color: #DC191B;
     color: black;
-    border: 1px solid #A1F700;
+    border: 1px solid #DC191B;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 15px;
