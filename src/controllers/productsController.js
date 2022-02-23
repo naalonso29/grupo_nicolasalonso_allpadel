@@ -6,6 +6,15 @@ const controller = {
     },
     carrito: (req, res) => {
         res.render(path.resolve(__dirname, "..", "views", "products", "cart"))
+    },
+    homeXCategoria: (req, res) => {
+        res.render(path.resolve(__dirname, "..", "views", "products", "home_secundario"))
+    },
+    create: (req, res) => {
+        res.render(path.resolve(__dirname, "..", "views", "products", "create"))
+    },
+    modify: (req, res) => {
+        res.render(path.resolve(__dirname, "..", "views", "products", "modify"))
     }
 }
 

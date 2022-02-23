@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {}
+
+@media (min-width: 768px) and (max-width: 1023px) {}
+
+@media (min-width: 1024px) {}
+
+main {
+    background-color: #EDEDED;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.info {
+    display: flex;
+    width: 50%;
+    align-items: center;
+}
+
+.perfil {
+    display: flex;
+    border: 2px solid black;
+    width: 80%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #DC191B;
+    padding: 8px;
+}
+
+.boton {
+    height: 8vh;
+    width: 18vw;
+    background-color: #0f1618;
+    color: white;
+    border: 1px solid #0f1618;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 3vh;
+}
+
+.imagen {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen img {
+    width: 70%;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+    padding: 15px;
+}
+
+.file-select {
+    position: relative;
+    display: inline-block;
+    width: 60%;
+}
+
+.file-select::before {
+    background-color: #0f1618;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: 'Seleccionar';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.file-select input[type="file"] {
+    opacity: 0;
+    width: 260px;
+    height: 42px;
+    display: inline-block;
+}
+
+#src-file1::before {
+    content: 'Seleccionar Imagen';
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.info-items {
+    margin-left: 15px;
+}
+
+.info-items li {
+    list-style: none;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.btnGuardar {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+        <link href="/css/create.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/header.ejs") %>
+
+        <main>
+            <form action="">
+                <section class="carga">
+                    <section class="informacionProducto">
+                        <h3>Nombre</h3>
+                        <input type="text" name="nombre" id="nombre" class="campos">
+
+                        <h3>Descripcion</h3>
+                        <input type="text" name="descripcion" id="descripcion" class="descr">
+
+                        <h3>Categoria</h3>
+                        <select name="categoria" class="campos" required>
+                
+                    <option value="1">Paletas</option>
+                    <option value="2">Pelotas</option>
+                    <option value="3">Bolsos</option>
+                    <option value="4">Pistas</option>
+
+                </select>
+
+                        <h3>Precio</h3>
+                        <input type="text" name="precio" id="precio" class="campos">
+
+                        <h3>Stock</h3>
+                        <input type="text" name="stock" id="stock" class="campos">
+                    </section>
+                    <section class="cargaImagen">
+                        <img src="/img/profiles/default.jpg" alt="">
+                        <div class="file-select" id="src-file1">
+                            <input type="file" name="imageProfile" aria-label="Archivo">
+                        </div>
+                    </section>
+
+                    <section class="botones">
+
+                        <button type="submit" class="boton">Crear Producto</a></button>
+
+                    </section>
+
+                </section>
+            </form>
+        </main>
+
+        <%- include("../partials/footer.ejs") %>
+</body>
+
+</html>

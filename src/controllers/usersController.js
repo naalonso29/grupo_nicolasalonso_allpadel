@@ -6,6 +6,9 @@ const controller = {
     },
     register: (req, res) => {
         res.render(path.resolve(__dirname, "..", "views", "users", "register"))
+    },
+    profile: (req, res) => {
+        res.render(path.resolve(__dirname, "..", "views", "users", "profile"))
     }
 }
 

@@ -70,13 +70,10 @@ main {
 }
 
 .datos {
-    list-style: none;
-    font-family: 'Quicksand', sans-serif;
-}
-
-.datos li {
     margin-top: 3vh;
     margin-bottom: 3vh;
+    font-family: 'Quicksand', sans-serif;
+    height: 25vh;
 }
 
 .carrito-compartir {

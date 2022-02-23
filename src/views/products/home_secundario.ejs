@@ -2,14 +2,29 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <%- include("../partials/head.ejs") %>
+        <link href="/css/secundario.css" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Esto es el home secundario</h1>
+    <%- include("../partials/header.ejs") %>
+        <main>
+            <section>
+                <h1>CATEGORIA</h1>
+                <article>
+                    <a class="a-homesecundario" href="/">
+                        <img src="/img/paleta1.jpg" alt="Producto1">
+                    </a>
+                    <div>
+                        <p class="descr"><b>Nombre del producto</b></p>
+                        <p class="precios">
+                            $ 20,000
+                        </p>
+                    </div>
+                </article>
+            </section>
+        </main>
+        <%- include("../partials/footer.ejs") %>
 </body>
 
 </html>
