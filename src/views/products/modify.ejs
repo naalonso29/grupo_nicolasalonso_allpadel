@@ -10,17 +10,17 @@
     <%- include("../partials/header.ejs") %>
 
         <main>
-            <form action="/" class="frmCarga">
+            <form action="/products/<%= producto.id %>?_method=PUT" method="post" class="frmCarga">
                 <section class="carga">
                     <section class="informacionProducto">
                         <h3>Nombre</h3>
-                        <input type="text" name="nombre" id="nombre" class="campos">
+                        <input type="text" name="nombre" id="nombre" class="campos" value="<%= producto.nombre %>">
 
                         <h3>Descripcion</h3>
-                        <input type="text" name="descripcion" id="descripcion" class="descr">
+                        <input type="text" name="descripcion" id="descripcion" class="descr" value="<%= producto.descripcion %>">
 
                         <h3>Categoria</h3>
-                        <select name="categoria" class="campos" required>
+                        <select name="categoria" class="campos" value="<%= producto.categoria %>" required>
                 
                     <option value="1">Paletas</option>
                     <option value="2">Pelotas</option>
@@ -30,15 +30,15 @@
                 </select>
 
                         <h3>Precio</h3>
-                        <input type="text" name="precio" id="precio" class="campos">
+                        <input type="text" name="precio" id="precio" class="campos" value="<%= producto.precio %>">
 
                         <h3>Stock</h3>
-                        <input type="text" name="stock" id="stock" class="campos">
+                        <input type="text" name="stock" id="stock" class="campos" value="<%= producto.stock %>">
                     </section>
                     <section class="cargaImagen">
-                        <img src="/img/profiles/default.jpg" alt="">
+                        <img src="<%= producto.imagen %>" alt="">
                         <div class="file-select" id="src-file1">
-                            <input type="file" name="imageProfile" aria-label="Archivo">
+                            <input type="file" name="imagen" aria-label="Archivo">
                         </div>
                     </section>
 
@@ -46,7 +46,7 @@
 
                         <button type="submit" class="boton guardar">Guardar Cambios</a></button>
             </form>
-            <form action="/products/detail" class="btnEliminar">
+            <form action="/products/<%= producto.id %>?_method=DELETE" method="post" class="btnEliminar">
                 <button type="submit" class="boton">Eliminar Producto</button>
             </form>
 

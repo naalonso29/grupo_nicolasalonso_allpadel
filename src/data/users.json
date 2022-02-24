@@ -1,0 +1,9 @@
+[{
+    "id": 1,
+    "nombre": "Nicolas",
+    "apellido": "Alonso",
+    "email": "naalonso29@gmail.com",
+    "password": "1234",
+    "image": "/img/profiles/default.jpg",
+    "esAdmin": true
+}]

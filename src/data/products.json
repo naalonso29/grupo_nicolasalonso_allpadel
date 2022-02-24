@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nombre": "Paleta",
+    "categoria": "1",
+    "precio": "3000",
+    "imagen": "/img/paleta1.jpg",
+    "descripcion": "Una zapatilla",
+    "stock": "10"
+  },
+  {
+    "id": 2,
+    "nombre": "Paleta",
+    "categoria": "2",
+    "precio": "3000",
+    "imagen": "/img/paleta1.jpg",
+    "descripcion": "Una zapatilla",
+    "stock": "10"
+  },
+  {
+    "id": 5,
+    "nombre": "Pelotas Head",
+    "categoria": "2",
+    "precio": "2500",
+    "imagen": "/img/pelota.jpg",
+    "descripcion": "Esta es la descripcion",
+    "stock": "10"
+  }
+]

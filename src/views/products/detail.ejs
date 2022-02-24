@@ -10,29 +10,40 @@
     <%- include("../partials/header.ejs") %>
 
         <main>
-            <section class="producto">
-                <section class="izq-img">
-                    <img src="/img/paleta1.jpg" alt="FotoProducto">
-                </section>
-                <section class="der-info">
-                    <h1>NOMBRE DEL PRODUCTO</h1>
-                    <article class="precio-fav">
-                        <p>$ 20,000</p>
-                        <i class="far fa-heart"></i>
-                    </article>
-                    <p class="datos">Forma: Redonda <br> Balance: Bajo <br> Nucleo: Foam importado recubierto por triple lamina de fibra de carbono <br> Peso: 370
-                    </p>
+            <% if (producto == undefined) { %>
+                <h1>ERROR AL CARGAR EL PRODUCTO</h1>
+                <% } else { %>
+                    <section class="producto">
+                        <section class="izq-img">
+                            <img src="<%= producto.imagen %>" alt="FotoProducto">
+                        </section>
+                        <section class="der-info">
+                            <h1>
+                                <%= producto.nombre %>
+                            </h1>
+                            <article class="precio-fav">
+                                <p>$
+                                    <%= producto.precio %>
+                                </p>
+                                <i class="far fa-heart"></i>
+                            </article>
+                            <p class="datos">
+                                <%= producto.descripcion %>
+                            </p>
 
 
-                    <article class="carrito-compartir">
-                        <form action="/products/cart">
-                            <button type="submit" class="boton">Agregar al Carrito</button>
-                        </form>
-                        <i class="fas fa-share-alt"></i>
-                    </article>
+                            <article class="carrito-compartir">
+                                <form action="/products/cart">
+                                    <button type="submit" class="boton">Agregar al Carrito</button>
+                                </form>
+                                <i class="fas fa-share-alt"></i>
+                            </article>
 
-                </section>
-            </section>
+                        </section>
+                    </section>
+
+                    <% } %>
+
         </main>
 
         <%- include("../partials/footer.ejs") %>

@@ -11,17 +11,20 @@
         <main>
             <section>
                 <h1>CATEGORIA</h1>
-                <article>
-                    <a class="a-homesecundario" href="/">
-                        <img src="/img/paleta1.jpg" alt="Producto1">
-                    </a>
-                    <div>
-                        <p class="descr"><b>Nombre del producto</b></p>
-                        <p class="precios">
-                            $ 20,000
-                        </p>
-                    </div>
-                </article>
+                <% for( let i = 0; i < productos.length; i++ ) { %>
+                    <article>
+                        <a class="a-homesecundario" href="/products/detail/<%= productos[i].id %>">
+                            <img src="<%= productos[i].imagen %>" alt="Producto1">
+                        </a>
+                        <div>
+                            <p class="descr"><b><%= productos[i].nombre %></b></p>
+                            <p class="precios">
+                                $
+                                <%= productos[i].precio %>
+                            </p>
+                        </div>
+                    </article>
+                    <% } %>
             </section>
         </main>
         <%- include("../partials/footer.ejs") %>
