@@ -10,7 +10,7 @@
     <%- include("../partials/header.ejs") %>
 
         <main>
-            <form action="/products/<%= producto.id %>?_method=PUT" method="post" class="frmCarga">
+            <form enctype="multipart/form-data" action="/products/<%= producto.id %>?_method=PUT" method="post" class="frmCarga">
                 <section class="carga">
                     <section class="informacionProducto">
                         <h3>Nombre</h3>

@@ -9,28 +9,41 @@
 <body>
     <%- include("../partials/header.ejs") %>
         <main>
-            <section class="perfil">
-                <section class="info">
-                    <ul class="info-items">
-                        <li><b>Nombre: </b>Nicolas</li>
-                        <li><b>Apellido: </b>Alonso</li>
-                        <li><b>Email: </b>naalonso29@gmail.com</li>
-                        <li><b>Tipo de usuario: </b>Administrador</li>
-                    </ul>
+            <form enctype="multipart/form-data" action="/users/profile?_method=PUT" method="post">
+                <section class="perfil">
+                    <section class="info">
+                        <ul class="info-items">
+                            <li><b>Nombre: </b>
+                                <%= usuario.nombre %>
+                            </li>
+                            <li><b>Apellido: </b>
+                                <%= usuario.apellido %>
+                            </li>
+                            <li><b>Email: </b>
+                                <%= usuario.email %>
+                            </li>
+                            <% if (usuario.administrador == true) { %>
+                                <li><b>Tipo de usuario: </b>Administrador</li>
+                                <% } else { %>
+                                    <li><b>Tipo de usuario: </b>Comprador</li>
+                                    <% } %>
+
+                        </ul>
+                    </section>
+                    <section class="imagen">
+                        <img src="<%= usuario.imagen %>" alt="">
+                        <div class="file-select" id="src-file1">
+                            <input type="file" name="imagen" aria-label="Archivo">
+                        </div>
+                    </section>
                 </section>
-                <section class="imagen">
-                    <img src="/img/profiles/default.jpg" alt="">
-                    <div class="file-select" id="src-file1">
-                        <input type="file" name="imageProfile" aria-label="Archivo">
-                    </div>
+
+                <section class="btnGuardar">
+                    <button type="submit" class="boton">Guardar</button>
                 </section>
-            </section>
-
-            <section class="btnGuardar">
-                <button type="submit" class="boton">Guardar</button>
-            </section>
 
 
+            </form>
         </main>
         <%- include("../partials/footer.ejs") %>
 </body>

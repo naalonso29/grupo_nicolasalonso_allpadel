@@ -64,6 +64,8 @@ main section a {
 
 main section article img {
     width: 100%;
+    height: auto;
+    max-height: 400px;
     display: block;
     border-bottom: 1px solid #ededed;
 }

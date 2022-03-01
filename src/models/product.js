@@ -20,12 +20,15 @@ const model = {
     guardar: data => {
         let all = model.listar()
         let id = all.length > 0 ? all[all.length - 1].id + 1 : 1
-        let nombre = data.nombre
-        let categoria = data.categoria
-        let precio = data.precio
-        let imagen = "/img/" + data.imagen
-        let descripcion = data.descripcion
-        let stock = data.stock
+        let nombre = data.body.nombre
+        let categoria = data.body.categoria
+        let precio = data.body.precio
+        let imagen = "/img/x-producto.jpg"
+        if (data.file.filename != "") {
+            imagen = "/img/products/" + data.file.filename;
+        }
+        let descripcion = data.body.descripcion
+        let stock = data.body.stock
         let product = { id: id, nombre, categoria, precio, imagen, descripcion, stock }
         all.push(product)
         fs.writeFileSync(path.resolve(__dirname, '..', 'data', 'products.json'), JSON.stringify(all, null, 2))
@@ -37,8 +40,8 @@ const model = {
         productoAEditar.nombre = req.body.nombre;
         productoAEditar.categoria = req.body.categoria;
         productoAEditar.precio = req.body.precio;
-        if (req.body.imagen != "") {
-            productoAEditar.imagen = "/img/" + req.body.imagen;
+        if (req.file.filename != "") {
+            productoAEditar.imagen = "/img/products/" + req.file.filename;
         }
         productoAEditar.descripcion = req.body.descripcion;
         productoAEditar.stock = req.body.stock;

@@ -1,9 +1,19 @@
 [{
-    "id": 1,
-    "nombre": "Nicolas",
-    "apellido": "Alonso",
-    "email": "naalonso29@gmail.com",
-    "password": "1234",
-    "image": "/img/profiles/default.jpg",
-    "esAdmin": true
-}]
+        "id": 1,
+        "nombre": "Nicolas",
+        "apellido": "Alonso",
+        "email": "naalonso29@gmail.com",
+        "password": "$2a$10$boCIgWrlGDnp/m4WlhjGueQXw0rGIJDgzg6K4EQ0j51GLDx5XNu06",
+        "image": "/img/profiles/default.jpg",
+        "administrador": true
+    },
+    {
+        "id": 3,
+        "nombre": "PruebaNombre",
+        "apellido": "apellidoprueba",
+        "email": "prueba@gmail.com",
+        "password": "$2a$10$boCIgWrlGDnp/m4WlhjGueQXw0rGIJDgzg6K4EQ0j51GLDx5XNu06",
+        "imagen": "/img/profiles/profile-1645826325112.png",
+        "administrador": false
+    }
+]

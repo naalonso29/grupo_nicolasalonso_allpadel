@@ -18,7 +18,7 @@ app.set("view engine", "ejs");
 app.listen(app.get("port"), () => console.log("Servidor Corriendo"));
 
 app.use(session({
-    secret: "secreto",
+    secret: "mensajeSecreto",
     resave: false,
     saveUninitialized: false
 }));

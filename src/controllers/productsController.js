@@ -22,9 +22,10 @@ const controller = {
         res.render(path.resolve(__dirname, "..", "views", "products", "modify"), { producto: product.mostrar(req.params.id) })
     },
     crearProducto: (req, res) => {
-        product.guardar(req.body);
+        product.guardar(req);
 
-        res.redirect("/")
+        res.redirect("/products/")
+
     },
     modificarProducto: (req, res) => {
 
