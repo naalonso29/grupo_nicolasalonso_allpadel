@@ -4,7 +4,7 @@
         "apellido": "Alonso",
         "email": "naalonso29@gmail.com",
         "password": "$2a$10$boCIgWrlGDnp/m4WlhjGueQXw0rGIJDgzg6K4EQ0j51GLDx5XNu06",
-        "image": "/img/profiles/default.jpg",
+        "imagen": "/img/profiles/default.jpg",
         "administrador": true
     },
     {

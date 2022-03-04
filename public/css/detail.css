@@ -76,6 +76,12 @@ main {
     height: 25vh;
 }
 
+.datos li {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    list-style: none;
+}
+
 .carrito-compartir {
     display: flex;
     justify-content: space-between;
@@ -98,4 +104,11 @@ main {
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 15px;
+}
+
+a:link,
+a:visited,
+a:active {
+    text-decoration: none;
+    color: black;
 }
