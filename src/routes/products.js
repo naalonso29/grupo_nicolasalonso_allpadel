@@ -22,15 +22,17 @@ const upload = multer({ storage })
 
 router.get("/", productController.home_secundario)
 
+router.get('/lista/:categoria', productController.itemsCategoria)
+
+router.get('/edit/:id', sinLoguear, esAdmin, productController.modify)
+
 router.get("/detail/:id", productController.detalleProducto)
+
+router.get("/:categoria/:id", productController.home_lista_categoria)
 
 router.get('/cart', sinLoguear, productController.carrito)
 
-router.get('/lista/:categoria', productController.homeXCategoria)
-
 router.get('/create', sinLoguear, esAdmin, productController.create)
-
-router.get('/edit/:id', sinLoguear, esAdmin, productController.modify)
 
 router.put('/:id', upload.single('imagen'), productController.modificarProducto)
 

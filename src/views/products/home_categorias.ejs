@@ -3,7 +3,7 @@
 
 <head>
     <%- include("../partials/head.ejs") %>
-        <link href="/css/secundario.css" rel="stylesheet">
+        <link href="/css/categorias.css" rel="stylesheet">
 </head>
 
 <body>
@@ -11,20 +11,18 @@
         <main>
             <section>
 
-                <% if (productos.length == 0) { %>
-                    <h1>NO HAY PRODUCTOS</h1>
+                <% if (categoria.length == 0) { %>
+                    <h1>NO HAY ITEMS</h1>
                     <% } else {%>
 
-                        <% for( let i = 0; i < productos.length; i++ ) { %>
+                        <% for( let i = 0; i < categoria.length; i++ ) { %>
                             <article>
-                                <a class="a-homesecundario" href="/products/detail/<%= productos[i].id_producto %>">
-                            <img src="<%= productos[i].imagen %>" alt="Producto1">
+                                <a class="a-homesecundario" href="/products/<%= categoria[i].nombrecategoria %>/<%= categoria[i].id %>">
+                            <img src="<%= categoria[i].imagen %>" alt="Producto1">
                         </a>
                                 <div>
-                                    <p class="descr"><b><%= productos[i].nombre %></b></p>
                                     <p class="precios">
-                                        $
-                                        <%= productos[i].precio %>
+                                        <%= categoria[i].nombre %>
                                     </p>
                                 </div>
                             </article>

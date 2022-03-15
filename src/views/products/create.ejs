@@ -22,30 +22,27 @@
                         <h3>Marca</h3>
                         <select name="marca" class="campos" required>
                 
-                            <option value="1">Paletas</option>
-                            <option value="2">Pelotas</option>
-                            <option value="3">Bolsos</option>
-                            <option value="4">Pistas</option>
+                            <% for( let i = 0; i < marcas.length; i++ ) { %>
+                                    <option value=<%= i+1 %>><%= marcas[i].nombre %></option>
+                            <% } %>
 
                         </select>
 
                         <h3>Forma</h3>
                         <select name="forma" class="campos" required>
                 
-                            <option value="1">Paletas</option>
-                            <option value="2">Pelotas</option>
-                            <option value="3">Bolsos</option>
-                            <option value="4">Pistas</option>
+                            <% for( let i = 0; i < formas.length; i++ ) { %>
+                                <option value=<%= i+1 %>><%= formas[i].nombre %></option>
+                            <% } %>
 
                         </select>
 
                         <h3>Color</h3>
                         <select name="color" class="campos" required>
                 
-                            <option value="1">Paletas</option>
-                            <option value="2">Pelotas</option>
-                            <option value="3">Bolsos</option>
-                            <option value="4">Pistas</option>
+                            <% for( let i = 0; i < colores.length; i++ ) { %>
+                                <option value=<%= i+1 %>><%= colores[i].nombre %></option>
+                            <% } %>
 
                         </select>
 

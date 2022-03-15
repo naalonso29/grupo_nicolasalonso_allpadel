@@ -3,6 +3,9 @@ const user = require('../models/user')
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
+const db = require('../../database/models');
+const UserType = require('../../database/models/UserType');
+const Sequelize = require('sequelize');
 
 const controller = {
     login: (req, res) => {
@@ -12,62 +15,102 @@ const controller = {
         res.render(path.resolve(__dirname, "..", "views", "users", "register"))
     },
     profile: (req, res) => {
-        res.render(path.resolve(__dirname, "..", "views", "users", "profile"), { usuario: req.session.userLogged })
+        db.sequelize.query("SELECT `users`.`id`, `users`.`nombre`, `users`.`apellido`, `users`.`imagen`, `users`.`email`, " +
+                " `users`.`contrasenia`, `usertypes`.`nombre` as `esAdmin` FROM `users` INNER JOIN `usertypes` ON " +
+                " `users`.`id_tipo` = `usertypes`.`id_tipo` WHERE `users`.`id` = :idUsuario", { replacements: { idUsuario: req.session.userLogged.id }, type: db.sequelize.QueryTypes.SELECT })
+            .then(datos => {
+                res.render(path.resolve(__dirname, "..", "views", "users", "profile"), { usuario: datos[0] })
+            })
+
+
     },
     crearPerfil: (req, res) => {
 
-        req.body.password = bcrypt.hashSync(req.body.password, 10);
+        let sql = "SELECT `users`.`id`, `users`.`nombre`, `users`.`apellido`, `users`.`imagen`, `users`.`email`, " +
+            " `users`.`contrasenia`, `usertypes`.`nombre` as `esAdmin` FROM `users` INNER JOIN `usertypes` ON " +
+            " `users`.`id_tipo` = `usertypes`.`id_tipo` WHERE `users`.`email` = :emailusuario"
 
-        let email = req.body.email
+        db.sequelize.query(sql, { replacements: { emailusuario: req.body.email }, type: db.sequelize.QueryTypes.SELECT })
+            .then(datos => {
 
-        user.guardar(req.body);
+                if (datos.length == 0) {
 
-        let nuevoUsuario = user.mostrarPorEmail(email)
+                    req.body.password = bcrypt.hashSync(req.body.password, 10);
 
-        req.session.userLogged = nuevoUsuario;
+                    let imagenAGuardar = "/img/profiles/default.jpg"
+                    if (req.file != undefined) {
+                        imagenAGuardar = "/img/profiles/" + req.file.filename;
+                    }
 
-        res.redirect('/users/profile')
+                    db.users.create({
+
+                        nombre: req.body.nombre,
+                        apellido: req.body.apellido,
+                        email: req.body.email,
+                        contrasenia: req.body.password,
+                        imagen: imagenAGuardar,
+                        id_tipo: 2
+
+                    })
+
+                    res.redirect('/users/login')
+
+                } else {
+                    res.send("ESTE MAIL YA EXISTE")
+                }
+
+
+            })
+
     },
     validarLogin: (req, res) => {
 
-        let usuario = user.mostrarPorEmail(req.body.email);
+        db.sequelize.query("SELECT `users`.`id`, `users`.`nombre`, `users`.`apellido`, `users`.`imagen`, `users`.`email`, " +
+                " `users`.`contrasenia`, `usertypes`.`nombre` as `esAdmin` FROM `users` INNER JOIN `usertypes` ON " +
+                " `users`.`id_tipo` = `usertypes`.`id_tipo` WHERE `users`.`email` = :emailusuario", { replacements: { emailusuario: req.body.email }, type: db.sequelize.QueryTypes.SELECT })
+            .then(datos => {
+                let usuario = datos[0]
 
-        let errors = validationResult(req)
+                let errors = validationResult(req)
 
-        if (errors.isEmpty()) {
+                if (errors.isEmpty()) {
 
-            if (usuario != undefined) {
+                    if (usuario.length != 0) {
 
-                if (bcrypt.compareSync(req.body.password, usuario.password)) {
+                        if (bcrypt.compareSync(req.body.password, usuario.contrasenia)) {
 
-                    req.session.userLogged = usuario;
-                    res.redirect('/users/profile')
+                            req.session.userLogged = usuario;
+                            res.redirect('/users/profile')
+
+                        } else {
+                            res.render(path.resolve(__dirname, "..", "views", "users", "login"), { errorclave: { clave: { msg: "Clave incorrecta" } } })
+                        }
+
+                    } else {
+                        res.render(path.resolve(__dirname, "..", "views", "users", "login"), { erroremail: { email: { msg: "Email inexistente" } } })
+                    }
 
                 } else {
-                    res.render(path.resolve(__dirname, "..", "views", "users", "login"), { errorclave: { clave: { msg: "Clave incorrecta" } } })
+                    res.render(path.resolve(__dirname, "..", "views", "users", "login"), { errors: errors.array() })
                 }
 
-            } else {
-                res.render(path.resolve(__dirname, "..", "views", "users", "login"), { erroremail: { email: { msg: "Email inexistente" } } })
-            }
+            })
 
-        } else {
-            res.render(path.resolve(__dirname, "..", "views", "users", "login"), { errors: errors.array() })
-        }
+
     },
     actualizarPerfil: (req, res) => {
 
-        if (req.file == undefined) {
+        if (req.file != undefined) {
 
-            req.file.filename = "/img/users/default-img.jpg"
+            db.users.update({
+                imagen: '/img/profiles/' + req.file.filename
 
+            }, {
+                where: { id: req.session.userLogged.id }
+            })
         }
 
-        user.editar(req, res);
-
-        req.session.userLogged = user.mostrar(req.session.userLogged.id)
-
-        res.render(path.resolve(__dirname, "..", "views", "users", "profile"), { usuario: req.session.userLogged });
+        res.redirect("/users/profile")
 
     }
 }

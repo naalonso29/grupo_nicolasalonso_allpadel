@@ -10,7 +10,7 @@
     <%- include("../partials/header.ejs") %>
 
         <main>
-            <form enctype="multipart/form-data" action="/products/<%= producto.id %>?_method=PUT" method="post" class="frmCarga">
+            <form enctype="multipart/form-data" action="/products/<%= producto.id_producto %>?_method=PUT" method="post" class="frmCarga">
                 <section class="carga">
                     <section class="informacionProducto">
                         <h3>Nombre</h3>
@@ -20,32 +20,42 @@
                         <input type="text" name="descripcion" id="descripcion" class="descr" value="<%= producto.descripcion %>">
 
                         <h3>Marca</h3>
-                        <select name="marca" class="campos" value="<%= producto.marca %>">
+                        <select name="marca" class="campos">
                 
-                            <option value="1">Paletas</option>
-                            <option value="2">Pelotas</option>
-                            <option value="3">Bolsos</option>
-                            <option value="4">Pistas</option>
+                            <% for( let i = 0; i < marcas.length; i++ ) { %>
+                                <% if (producto.id_marca == marcas.id_marca) { %>
+                                        <option value=<%= i+1 %> selected ><%= marcas[i].nombre %></option>
+                                    <% } else { %>
+                                        <option value=<%= i+1 %>><%= marcas[i].nombre %></option>
+                                    <% } %> 
+                            <% } %>
 
                         </select>
 
                         <h3>Forma</h3>
-                        <select name="forma" class="campos" value="<%= producto.forma %>">
-                
-                            <option value="1">Paletas</option>
-                            <option value="2">Pelotas</option>
-                            <option value="3">Bolsos</option>
-                            <option value="4">Pistas</option>
+                        <select name="forma" class="campos">
+                            
+                            <% for( let i = 0; i < formas.length; i++ ) { %>
+                                <% if (producto.id_forma == formas.id_forma) { %>
+                                        <option value=<%= i+1 %> selected ><%= formas[i].nombre %></option>
+                                    <% } else { %>
+                                        <option value=<%= i+1 %>><%= formas[i].nombre %></option>
+                                    <% } %> 
+                            <% } %>
 
                         </select>
 
                         <h3>Color</h3>
-                        <select name="color" class="campos" value="<%= producto.color %>">
+                        <select name="color" class="campos">
                 
-                            <option value="1">Paletas</option>
-                            <option value="2">Pelotas</option>
-                            <option value="3">Bolsos</option>
-                            <option value="4">Pistas</option>
+                            <% for( let i = 0; i < colores.length; i++ ) { %>
+                                <% if (producto.id_color == colores.id_color) { %>
+                                    <option value=<%= i+1 %> selected="selected"><%= colores[i].nombre %></option>
+                                <% } else { %>
+                                    <option value=<%= i+1 %>><%= colores[i].nombre %></option>
+                                <% } %> 
+                                
+                            <% } %> 
 
                         </select>
 
@@ -66,7 +76,7 @@
 
                         <button type="submit" class="boton guardar">Guardar Cambios</a></button>
             </form>
-            <form action="/products/<%= producto.id %>?_method=DELETE" method="post" class="btnEliminar">
+            <form action="/products/<%= producto.id_producto %>?_method=DELETE" method="post" class="btnEliminar">
                 <button type="submit" class="boton">Eliminar Producto</button>
             </form>
 

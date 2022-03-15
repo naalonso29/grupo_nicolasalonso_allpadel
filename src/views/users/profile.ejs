@@ -22,7 +22,7 @@
                             <li><b>Email: </b>
                                 <%= usuario.email %>
                             </li>
-                            <% if (usuario.administrador == true) { %>
+                            <% if (usuario.esAdmin == "Administrador") { %>
                                 <li><b>Tipo de usuario: </b>Administrador</li>
                                 <% } else { %>
                                     <li><b>Tipo de usuario: </b>Comprador</li>

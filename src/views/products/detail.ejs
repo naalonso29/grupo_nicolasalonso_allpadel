@@ -25,14 +25,22 @@
                                 <p>$
                                     <%= producto.precio %>
                                 </p>
-                                <a href="/products/edit/<%= producto.id %>"><i class="fas fa-edit"></i></a>
+                                <a href="/products/edit/<%= producto.id_producto %>"><i class="fas fa-edit"></i></a>
                             </article>
 
                             <ul class="datos">
-                                <li><b>Forma: </b></li>
-                                <li><b>Color: </b></li>
-                                <li><b>Marca: </b></li>
-                                <li><b>Descripcion</b></li>
+                                <li><b>Forma: </b>
+                                    <%= producto.forma %>
+                                </li>
+                                <li><b>Color: </b>
+                                    <%= producto.color %>
+                                </li>
+                                <li><b>Marca: </b>
+                                    <%= producto.marca %>
+                                </li>
+                                <li><b>Descripcion: </b>
+                                    <%= producto.descripcion %>
+                                </li>
                             </ul>
 
 
