@@ -18,13 +18,8 @@
                         <% for( let i = 0; i < categoria.length; i++ ) { %>
                             <article>
                                 <a class="a-homesecundario" href="/products/<%= categoria[i].nombrecategoria %>/<%= categoria[i].id %>">
-                            <img src="<%= categoria[i].imagen %>" alt="Producto1">
-                        </a>
-                                <div>
-                                    <p class="precios">
-                                        <%= categoria[i].nombre %>
-                                    </p>
-                                </div>
+                                    <img src="<%= categoria[i].imagen %>" alt="Producto1">
+                                </a>
                             </article>
                             <% }} %>
             </section>

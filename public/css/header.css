@@ -27,6 +27,10 @@ header i {
 
 header img {
     height: 100%;
+}
+
+.linkLogo {
+    height: 100%;
     padding: 20px;
 }
 

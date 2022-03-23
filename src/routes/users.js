@@ -31,6 +31,8 @@ router.post("/register", usersController.crearPerfil)
 
 router.get('/profile', sinLoguear, usersController.profile)
 
+router.get('/cierre', usersController.cerrarSesion)
+
 router.put("/profile", upload.single('imagen'), usersController.actualizarPerfil);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 <header>
     <section class="secHeader">
         <section class="secLogo">
-            <img src="/img/logo.jpg" alt="AllPadel" href="/">
+            <a href="/" class="linkLogo"><img src="/img/logo.jpg" alt="AllPadel"></a>
         </section>
         <section class="secMenu">
             <ul class="lista">
@@ -9,12 +9,23 @@
                 <li><a href="/products/lista/marcas" class="links">Marcas</a></li>
                 <li><a href="/products/lista/formas" class="links">Formas</a></li>
                 <li><a href="/products/lista/colores" class="links">Colores</a></li>
-                <li><a href="" class="links">Contacto</a></li>
+
+                <% if (usuarioLog == undefined) { %>
+                    <li><a href="/users/login" class="links">Perfil</a></li>
+                    <% } else { %>
+                        <a href="/users/profile" class="links">
+                            <%= usuarioLog.nombre + " " + usuarioLog.apellido %>
+                        </a>
+                        <% } %>
             </ul>
         </section>
         <section class="secCarrito">
-            <a href="/users/login" class="links">Iniciar Sesion</a>
-            <a href="/products/cart" class="links"><i class="fas fa-shopping-cart"></i></a>
+            <% if (usuarioLog == undefined) { %>
+                <a href="/users/login" class="links">Iniciar Sesion</a>
+                <% } else { %>
+                    <a href="/users/cierre" class="links">Cerrar Sesion</a>
+                    <% } %>
+                        <a href="/products/cart" class="links"><i class="fas fa-shopping-cart"></i></a>
         </section>
     </section>
 </header>

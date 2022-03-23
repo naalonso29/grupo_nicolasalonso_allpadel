@@ -9,17 +9,17 @@ const Sequelize = require('sequelize');
 
 const controller = {
     login: (req, res) => {
-        res.render(path.resolve(__dirname, "..", "views", "users", "login"))
+        res.render(path.resolve(__dirname, "..", "views", "users", "login"), { usuarioLog: req.session.userLogged })
     },
     register: (req, res) => {
-        res.render(path.resolve(__dirname, "..", "views", "users", "register"))
+        res.render(path.resolve(__dirname, "..", "views", "users", "register"), { usuarioLog: req.session.userLogged })
     },
     profile: (req, res) => {
         db.sequelize.query("SELECT `users`.`id`, `users`.`nombre`, `users`.`apellido`, `users`.`imagen`, `users`.`email`, " +
                 " `users`.`contrasenia`, `usertypes`.`nombre` as `esAdmin` FROM `users` INNER JOIN `usertypes` ON " +
                 " `users`.`id_tipo` = `usertypes`.`id_tipo` WHERE `users`.`id` = :idUsuario", { replacements: { idUsuario: req.session.userLogged.id }, type: db.sequelize.QueryTypes.SELECT })
             .then(datos => {
-                res.render(path.resolve(__dirname, "..", "views", "users", "profile"), { usuario: datos[0] })
+                res.render(path.resolve(__dirname, "..", "views", "users", "profile"), { usuario: datos[0], usuarioLog: req.session.userLogged })
             })
 
 
@@ -83,15 +83,15 @@ const controller = {
                             res.redirect('/users/profile')
 
                         } else {
-                            res.render(path.resolve(__dirname, "..", "views", "users", "login"), { errorclave: { clave: { msg: "Clave incorrecta" } } })
+                            res.render(path.resolve(__dirname, "..", "views", "users", "login"), { errorclave: { clave: { msg: "Clave incorrecta" } }, usuarioLog: req.session.userLogged })
                         }
 
                     } else {
-                        res.render(path.resolve(__dirname, "..", "views", "users", "login"), { erroremail: { email: { msg: "Email inexistente" } } })
+                        res.render(path.resolve(__dirname, "..", "views", "users", "login"), { erroremail: { email: { msg: "Email inexistente" } }, usuarioLog: req.session.userLogged })
                     }
 
                 } else {
-                    res.render(path.resolve(__dirname, "..", "views", "users", "login"), { errors: errors.array() })
+                    res.render(path.resolve(__dirname, "..", "views", "users", "login"), { errors: errors.array(), usuarioLog: req.session.userLogged })
                 }
 
             })
@@ -112,6 +112,11 @@ const controller = {
 
         res.redirect("/users/profile")
 
+    },
+    cerrarSesion: (req, res) => {
+        req.session.destroy()
+
+        res.redirect("/")
     }
 }
 

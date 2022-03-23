@@ -13,13 +13,13 @@ const controller = {
 
         db.sequelize.query(sql, { replacements: { idProducto: req.params.id }, type: db.sequelize.QueryTypes.SELECT })
             .then(datos => {
-                res.render(path.resolve(__dirname, "..", "views", "products", "detail"), { producto: datos[0] })
+                res.render(path.resolve(__dirname, "..", "views", "products", "detail"), { producto: datos[0], usuarioLog: req.session.userLogged })
             })
 
 
     },
     carrito: (req, res) => {
-        res.render(path.resolve(__dirname, "..", "views", "products", "cart"))
+        res.render(path.resolve(__dirname, "..", "views", "products", "cart"), { usuarioLog: req.session.userLogged })
     },
     itemsCategoria: (req, res) => {
         let sql = ""
@@ -39,7 +39,7 @@ const controller = {
         if (sql != "") {
             db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT })
                 .then(datos => {
-                    res.render(path.resolve(__dirname, "..", "views", "products", "home_categorias"), { categoria: datos })
+                    res.render(path.resolve(__dirname, "..", "views", "products", "home_categorias"), { categoria: datos, usuarioLog: req.session.userLogged })
                 })
         } else {
             res.send("NO EXISTE ESA CATEGORIA")
@@ -51,7 +51,7 @@ const controller = {
 
         db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT })
             .then(datos => {
-                res.render(path.resolve(__dirname, "..", "views", "products", "home_secundario"), { productos: datos })
+                res.render(path.resolve(__dirname, "..", "views", "products", "home_secundario"), { productos: datos, usuarioLog: req.session.userLogged })
             })
     },
     home_lista_categoria: (req, res) => {
@@ -72,7 +72,7 @@ const controller = {
         if (sql != "") {
             db.sequelize.query(sql, { replacements: { idCategoria: req.params.id }, type: db.sequelize.QueryTypes.SELECT })
                 .then(datos => {
-                    res.render(path.resolve(__dirname, "..", "views", "products", "home_secundario"), { productos: datos })
+                    res.render(path.resolve(__dirname, "..", "views", "products", "home_secundario"), { productos: datos, usuarioLog: req.session.userLogged })
                 })
         } else {
             res.send("NO HAY PRODUCTOS DE ESTA CATEGORIA")
@@ -96,7 +96,7 @@ const controller = {
                         db.sequelize.query(sql4, { type: db.sequelize.QueryTypes.SELECT })
                             .then((datos) => {
                                 colores = datos
-                                return res.render(path.resolve(__dirname, "..", "views", "products", "create"), { formas: formas, colores: colores, marcas: marcas })
+                                return res.render(path.resolve(__dirname, "..", "views", "products", "create"), { formas: formas, colores: colores, marcas: marcas, usuarioLog: req.session.userLogged })
                             }).catch(error => res.send(error))
                     }).catch(error => res.send(error))
             }).catch(error => res.send(error))
@@ -124,7 +124,7 @@ const controller = {
                                 db.sequelize.query(sql4, { type: db.sequelize.QueryTypes.SELECT })
                                     .then((datos) => {
                                         colores = datos
-                                        return res.render(path.resolve(__dirname, "..", "views", "products", "modify"), { producto: producto[0], formas: formas, colores: colores, marcas: marcas })
+                                        return res.render(path.resolve(__dirname, "..", "views", "products", "modify"), { producto: producto[0], formas: formas, colores: colores, marcas: marcas, usuarioLog: req.session.userLogged })
                                     }).catch(error => res.send(error))
                             }).catch(error => res.send(error))
                     }).catch(error => res.send(error))
@@ -159,24 +159,37 @@ const controller = {
         if (req.file != undefined) {
             if (req.file.filename != "") {
                 imagenAGuardar = "/img/products/" + req.file.filename;
+
+                db.products.update({
+                    nombre: req.body.nombre,
+                    precio: req.body.precio,
+                    descripcion: req.body.descripcion,
+                    stock: req.body.stock,
+                    imagen: imagenAGuardar,
+                    id_forma: req.body.forma,
+                    id_color: req.body.color,
+                    id_marca: req.body.marca
+
+                }, {
+                    where: { id_producto: req.params.id }
+                })
             }
         } else {
-            imagenAGuardar = "/img/x-producto.jpg"
+            db.products.update({
+                nombre: req.body.nombre,
+                precio: req.body.precio,
+                descripcion: req.body.descripcion,
+                stock: req.body.stock,
+                id_forma: req.body.forma,
+                id_color: req.body.color,
+                id_marca: req.body.marca
+
+            }, {
+                where: { id_producto: req.params.id }
+            })
         }
 
-        db.products.update({
-            nombre: req.body.nombre,
-            precio: req.body.precio,
-            descripcion: req.body.descripcion,
-            stock: req.body.stock,
-            imagen: imagenAGuardar,
-            id_forma: req.body.forma,
-            id_color: req.body.color,
-            id_marca: req.body.marca
 
-        }, {
-            where: { id_producto: req.params.id }
-        })
 
         res.redirect("/products/")
     },

@@ -2,7 +2,7 @@ const fs = require('fs');
 
 function esAdmin(req, res, next) {
 
-    if (req.session.userLogged.administrador == false) {
+    if (req.session.userLogged.esAdmin == "Comprador") {
         return res.redirect('/')
     }
 

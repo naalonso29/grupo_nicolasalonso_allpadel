@@ -23,6 +23,7 @@
         box-shadow: 0px 0px 10px rgb(100, 100, 100);
         background-color: #DC191B;
         width: 32%;
+        border-radius: 100px;
     }
     .descr {
         font-size: 20px;
@@ -64,10 +65,11 @@ main section a {
 
 main section article img {
     width: 100%;
-    height: auto;
+    height: 100%;
     max-height: 400px;
     display: block;
     border-bottom: 1px solid #ededed;
+    border-radius: 100px;
 }
 
 main section article div {
