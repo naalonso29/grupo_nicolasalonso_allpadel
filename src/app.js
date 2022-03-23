@@ -15,7 +15,7 @@ app.set("port", 3000);
 app.set("view engine", "ejs");
 
 
-app.listen(app.get("port"), () => console.log("Servidor Corriendo"));
+app.listen(process.env.PORT || 3000, () => console.log("Servidor Corriendo"));
 
 app.use(session({
     secret: "mensajeSecreto",
