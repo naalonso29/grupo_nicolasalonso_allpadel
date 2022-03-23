@@ -10,7 +10,7 @@ https://vairo.com/padel/ https://www.babolat.com.ar/padel1/paletas/ https://roya
 
 ¿Qué productos o servicios brindará nuestro sitio?
 
-Nuestro sitio ofrecera productos relacionados al mundo del padel, desde pelotas, paletas, bolsos y canchas.
+Nuestro sitio ofrecera productos relacionados al mundo de las paletas de padel, teniendo todo tipo de marcas, formas y colores.
 
 ¿Quién será nuestra audiencia objetivo?
 
