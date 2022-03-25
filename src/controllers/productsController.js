@@ -6,16 +6,14 @@ const db = require('../../database/models');
 const controller = {
     detalleProducto: (req, res) => {
 
-        let sql = "SELECT p.id_producto, p.nombre, p.precio, p.descripcion, p.imagen, p.stock, c.nombre as color, f.nombre as forma, b.nombre as marca " +
-            "from products as p INNER JOIN colors as c ON c.id_color = p.id_color " +
-            "INNER JOIN forms as f on f.id_forma = p.id_forma " +
-            "INNER JOIN brands as b on b.id_marca = p.id_marca WHERE p.id_producto = :idProducto"
-
-        db.sequelize.query(sql, { replacements: { idProducto: req.params.id }, type: db.sequelize.QueryTypes.SELECT })
-            .then(datos => {
-                res.render(path.resolve(__dirname, "..", "views", "products", "detail"), { producto: datos[0], usuarioLog: req.session.userLogged })
+        db.products.findOne({
+                where: { idproducto: req.params.id },
+                attributes: ['idproducto', 'nombre', 'precio', 'descripcion', 'imagen', 'stock'],
+                include: [{ association: "colores" }, { association: "marcas" }, { association: "formas" }]
             })
-
+            .then(datos => {
+                res.render(path.resolve(__dirname, "..", "views", "products", "detail"), { producto: datos, usuarioLog: req.session.userLogged })
+            }).catch(error => res.send(error))
 
     },
     carrito: (req, res) => {
@@ -26,13 +24,13 @@ const controller = {
 
         switch (req.params.categoria) {
             case 'marcas':
-                sql = "SELECT id_marca as id, nombre, imagen, 'marcas' as nombrecategoria FROM brands";
+                sql = "SELECT idmarca as id, nombre, imagen, 'marcas' as nombrecategoria FROM brands";
                 break;
             case 'colores':
-                sql = "SELECT id_color as id, nombre, imagen, 'colores' as nombrecategoria FROM colors";
+                sql = "SELECT idcolor as id, nombre, imagen, 'colores' as nombrecategoria FROM colors";
                 break;
             case 'formas':
-                sql = "SELECT id_forma as id, nombre, imagen, 'formas' as nombrecategoria FROM forms";
+                sql = "SELECT idforma as id, nombre, imagen, 'formas' as nombrecategoria FROM forms";
                 break;
         }
 
@@ -47,53 +45,57 @@ const controller = {
 
     },
     home_secundario: (req, res) => {
-        let sql = "SELECT * FROM products"
-
-        db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT })
+        db.products.findAll({
+                attributes: ['idproducto', 'nombre', 'imagen', 'precio']
+            })
             .then(datos => {
                 res.render(path.resolve(__dirname, "..", "views", "products", "home_secundario"), { productos: datos, usuarioLog: req.session.userLogged })
             })
     },
     home_lista_categoria: (req, res) => {
-        let sql = ""
 
         switch (req.params.categoria) {
             case 'marcas':
-                sql = "SELECT p.id_producto, p.nombre, p.precio, p.imagen FROM products as p WHERE id_marca = :idCategoria";
+                db.products.findAll({
+                        where: { marcasIdmarca: req.params.id },
+                        attributes: ['idproducto', 'nombre', 'imagen', 'precio']
+                    })
+                    .then(datos => {
+                        res.render(path.resolve(__dirname, "..", "views", "products", "home_secundario"), { productos: datos, usuarioLog: req.session.userLogged })
+                    })
                 break;
             case 'colores':
-                sql = "SELECT p.id_producto, p.nombre, p.precio, p.imagen FROM products as p WHERE id_color = :idCategoria";
+                db.products.findAll({
+                        where: { coloresIdcolor: req.params.id },
+                        attributes: ['idproducto', 'nombre', 'imagen', 'precio']
+                    })
+                    .then(datos => {
+                        res.render(path.resolve(__dirname, "..", "views", "products", "home_secundario"), { productos: datos, usuarioLog: req.session.userLogged })
+                    })
                 break;
             case 'formas':
-                sql = "SELECT p.id_producto, p.nombre, p.precio, p.imagen FROM products as p WHERE id_forma = :idCategoria";
+                db.products.findAll({
+                        where: { formasIdforma: req.params.id },
+                        attributes: ['idproducto', 'nombre', 'imagen', 'precio']
+                    })
+                    .then(datos => {
+                        res.render(path.resolve(__dirname, "..", "views", "products", "home_secundario"), { productos: datos, usuarioLog: req.session.userLogged })
+                    })
                 break;
         }
 
-        if (sql != "") {
-            db.sequelize.query(sql, { replacements: { idCategoria: req.params.id }, type: db.sequelize.QueryTypes.SELECT })
-                .then(datos => {
-                    res.render(path.resolve(__dirname, "..", "views", "products", "home_secundario"), { productos: datos, usuarioLog: req.session.userLogged })
-                })
-        } else {
-            res.send("NO HAY PRODUCTOS DE ESTA CATEGORIA")
-        }
     },
     create: (req, res) => {
-        let sql2 = "SELECT * FROM forms"
-
-        let sql3 = "SELECT * FROM brands"
-
-        let sql4 = "SELECT * FROM colors"
 
         let formas, colores, marcas
 
-        db.sequelize.query(sql2, { type: db.sequelize.QueryTypes.SELECT })
+        db.forms.findAll()
             .then((datos) => {
                 formas = datos
-                db.sequelize.query(sql3, { type: db.sequelize.QueryTypes.SELECT })
+                db.brands.findAll()
                     .then((datos) => {
                         marcas = datos
-                        db.sequelize.query(sql4, { type: db.sequelize.QueryTypes.SELECT })
+                        db.colors.findAll()
                             .then((datos) => {
                                 colores = datos
                                 return res.render(path.resolve(__dirname, "..", "views", "products", "create"), { formas: formas, colores: colores, marcas: marcas, usuarioLog: req.session.userLogged })
@@ -103,28 +105,23 @@ const controller = {
     },
     modify: (req, res) => {
 
-        let sql = "SELECT * FROM products WHERE id_producto = :idProducto"
-
-        let sql2 = "SELECT * FROM forms"
-
-        let sql3 = "SELECT * FROM brands"
-
-        let sql4 = "SELECT * FROM colors"
-
         let formas, colores, marcas
 
-        db.sequelize.query(sql, { replacements: { idProducto: req.params.id }, type: db.sequelize.QueryTypes.SELECT })
+        db.products.findOne({
+                where: { idproducto: req.params.id },
+                attributes: ['idproducto', 'nombre', 'precio', 'descripcion', 'imagen', 'stock']
+            })
             .then((producto) => {
-                db.sequelize.query(sql2, { type: db.sequelize.QueryTypes.SELECT })
+                db.forms.findAll()
                     .then((datos) => {
                         formas = datos
-                        db.sequelize.query(sql3, { type: db.sequelize.QueryTypes.SELECT })
+                        db.brands.findAll()
                             .then((datos) => {
                                 marcas = datos
-                                db.sequelize.query(sql4, { type: db.sequelize.QueryTypes.SELECT })
+                                db.colors.findAll()
                                     .then((datos) => {
                                         colores = datos
-                                        return res.render(path.resolve(__dirname, "..", "views", "products", "modify"), { producto: producto[0], formas: formas, colores: colores, marcas: marcas, usuarioLog: req.session.userLogged })
+                                        return res.render(path.resolve(__dirname, "..", "views", "products", "modify"), { producto: producto, formas: formas, colores: colores, marcas: marcas, usuarioLog: req.session.userLogged })
                                     }).catch(error => res.send(error))
                             }).catch(error => res.send(error))
                     }).catch(error => res.send(error))
@@ -143,9 +140,9 @@ const controller = {
             descripcion: req.body.descripcion,
             stock: req.body.stock,
             imagen: imagenAGuardar,
-            id_forma: req.body.forma,
-            id_color: req.body.color,
-            id_marca: req.body.marca
+            forma: req.body.forma,
+            color: req.body.color,
+            marca: req.body.marca
 
         })
 
@@ -166,12 +163,12 @@ const controller = {
                     descripcion: req.body.descripcion,
                     stock: req.body.stock,
                     imagen: imagenAGuardar,
-                    id_forma: req.body.forma,
-                    id_color: req.body.color,
-                    id_marca: req.body.marca
+                    forma: req.body.forma,
+                    color: req.body.color,
+                    marca: req.body.marca
 
                 }, {
-                    where: { id_producto: req.params.id }
+                    where: { idproducto: req.params.id }
                 })
             }
         } else {
@@ -180,12 +177,12 @@ const controller = {
                 precio: req.body.precio,
                 descripcion: req.body.descripcion,
                 stock: req.body.stock,
-                id_forma: req.body.forma,
-                id_color: req.body.color,
-                id_marca: req.body.marca
+                forma: req.body.forma,
+                color: req.body.color,
+                marca: req.body.marca
 
             }, {
-                where: { id_producto: req.params.id }
+                where: { idproducto: req.params.id }
             })
         }
 
@@ -195,7 +192,7 @@ const controller = {
     },
     borrarProducto: (req, res) => {
 
-        db.products.destroy({ where: { id_producto: req.params.id } })
+        db.products.destroy({ where: { idproducto: req.params.id } })
 
         res.redirect('/products/');
     }

@@ -15,25 +15,27 @@ const controller = {
         res.render(path.resolve(__dirname, "..", "views", "users", "register"), { usuarioLog: req.session.userLogged })
     },
     profile: (req, res) => {
-        db.sequelize.query("SELECT `users`.`id`, `users`.`nombre`, `users`.`apellido`, `users`.`imagen`, `users`.`email`, " +
-                " `users`.`contrasenia`, `usertypes`.`nombre` as `esAdmin` FROM `users` INNER JOIN `usertypes` ON " +
-                " `users`.`id_tipo` = `usertypes`.`id_tipo` WHERE `users`.`id` = :idUsuario", { replacements: { idUsuario: req.session.userLogged.id }, type: db.sequelize.QueryTypes.SELECT })
+
+        db.users.findOne({
+                where: { id: req.session.userLogged.id },
+                attributes: ['id', 'nombre', 'apellido', 'email', 'imagen', 'contrasenia'],
+                include: [{ association: "tipos" }]
+            })
             .then(datos => {
-                res.render(path.resolve(__dirname, "..", "views", "users", "profile"), { usuario: datos[0], usuarioLog: req.session.userLogged })
+                res.render(path.resolve(__dirname, "..", "views", "users", "profile"), { usuario: datos, usuarioLog: req.session.userLogged })
             })
 
 
     },
     crearPerfil: (req, res) => {
 
-        let sql = "SELECT `users`.`id`, `users`.`nombre`, `users`.`apellido`, `users`.`imagen`, `users`.`email`, " +
-            " `users`.`contrasenia`, `usertypes`.`nombre` as `esAdmin` FROM `users` INNER JOIN `usertypes` ON " +
-            " `users`.`id_tipo` = `usertypes`.`id_tipo` WHERE `users`.`email` = :emailusuario"
-
-        db.sequelize.query(sql, { replacements: { emailusuario: req.body.email }, type: db.sequelize.QueryTypes.SELECT })
+        db.users.findOne({
+                where: { email: req.body.email },
+                attributes: ['id', 'nombre', 'apellido', 'email', 'imagen', 'contrasenia']
+            })
             .then(datos => {
 
-                if (datos.length == 0) {
+                if (datos == undefined) {
 
                     req.body.password = bcrypt.hashSync(req.body.password, 10);
 
@@ -49,7 +51,7 @@ const controller = {
                         email: req.body.email,
                         contrasenia: req.body.password,
                         imagen: imagenAGuardar,
-                        id_tipo: 2
+                        tiposIdtipo: 2
 
                     })
 
@@ -65,11 +67,12 @@ const controller = {
     },
     validarLogin: (req, res) => {
 
-        db.sequelize.query("SELECT `users`.`id`, `users`.`nombre`, `users`.`apellido`, `users`.`imagen`, `users`.`email`, " +
-                " `users`.`contrasenia`, `usertypes`.`nombre` as `esAdmin` FROM `users` INNER JOIN `usertypes` ON " +
-                " `users`.`id_tipo` = `usertypes`.`id_tipo` WHERE `users`.`email` = :emailusuario", { replacements: { emailusuario: req.body.email }, type: db.sequelize.QueryTypes.SELECT })
+        db.users.findOne({
+                where: { email: req.body.email },
+                attributes: ['id', 'nombre', 'apellido', 'email', 'imagen', 'contrasenia', ["tiposIdtipo", "esAdmin"]]
+            })
             .then(datos => {
-                let usuario = datos[0]
+                let usuario = datos
 
                 let errors = validationResult(req)
 

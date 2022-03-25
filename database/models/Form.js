@@ -3,7 +3,7 @@ module.exports = (sequelize, dataTypes) => {
     let alias = "forms"
 
     let columnas = {
-        id_forma: {
+        idforma: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             allowNull: false
@@ -23,6 +23,13 @@ module.exports = (sequelize, dataTypes) => {
     }
 
     const forms = sequelize.define(alias, columnas, config)
+
+    forms.associate = models => {
+        forms.hasMany(models.products, {
+            as: "productos",
+            foreingKey: "formasIdforma"
+        })
+    }
 
     return forms;
 }

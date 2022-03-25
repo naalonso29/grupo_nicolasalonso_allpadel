@@ -3,7 +3,7 @@ module.exports = (sequelize, dataTypes) => {
     let alias = "brands"
 
     let columnas = {
-        id_marca: {
+        idmarca: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             allowNull: false
@@ -23,6 +23,13 @@ module.exports = (sequelize, dataTypes) => {
     }
 
     const brands = sequelize.define(alias, columnas, config)
+
+    brands.associate = models => {
+        brands.hasMany(models.products, {
+            as: "productos",
+            foreingKey: "marcasIdmarca"
+        })
+    }
 
     return brands;
 }

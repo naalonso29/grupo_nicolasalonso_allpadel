@@ -25,18 +25,18 @@
                                 <p>$
                                     <%= producto.precio %>
                                 </p>
-                                <a href="/products/edit/<%= producto.id_producto %>"><i class="fas fa-edit"></i></a>
+                                <a href="/products/edit/<%= producto.idproducto %>"><i class="fas fa-edit"></i></a>
                             </article>
 
                             <ul class="datos">
                                 <li><b>Forma: </b>
-                                    <%= producto.forma %>
+                                    <%= producto.formas.nombre %>
                                 </li>
                                 <li><b>Color: </b>
-                                    <%= producto.color %>
+                                    <%= producto.colores.nombre %>
                                 </li>
                                 <li><b>Marca: </b>
-                                    <%= producto.marca %>
+                                    <%= producto.marcas.nombre %>
                                 </li>
                                 <li><b>Descripcion: </b>
                                     <%= producto.descripcion %>

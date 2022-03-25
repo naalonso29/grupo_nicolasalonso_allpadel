@@ -2,7 +2,7 @@ Grupo - Nicolas Alonso
 
 Trello: https://trello.com/b/28wtBtjP/tablerotrabajonicolasalonso
 
-Heroku: https://grupo-nicolas-alonso-allpadel.herokuapp.com/
+Heroku: https://grupo-nicolasalonso-allpadel.herokuapp.com/
 
 Paginas utilizadas como referencia:
 

@@ -3,7 +3,7 @@ module.exports = (sequelize, dataTypes) => {
     let alias = "colors"
 
     let columnas = {
-        id_color: {
+        idcolor: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             allowNull: false
@@ -27,7 +27,7 @@ module.exports = (sequelize, dataTypes) => {
     colors.associate = models => {
         colors.hasMany(models.products, {
             as: "productos",
-            foreingKey: "id_color"
+            foreingKey: "coloresIdcolor"
         })
     }
 

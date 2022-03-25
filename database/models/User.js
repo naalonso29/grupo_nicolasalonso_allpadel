@@ -29,7 +29,7 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING,
             allowNull: false
         },
-        id_tipo: {
+        tiposIdtipo: {
             type: dataTypes.INTEGER,
             allowNull: false
         }
@@ -44,7 +44,7 @@ module.exports = (sequelize, dataTypes) => {
     users.associate = models => {
         users.belongsTo(models.usertypes, {
             as: "tipos",
-            foreingKey: "id_tipo"
+            foreingKey: "idtipo"
         })
     }
 

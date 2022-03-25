@@ -3,13 +3,13 @@ module.exports = (sequelize, dataTypes) => {
     let alias = "products"
 
     let columnas = {
-        id_producto: {
+        idproducto: {
             type: dataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false
         },
-        id_color: {
+        coloresIdcolor: {
             type: dataTypes.INTEGER,
             allowNull: false
         },
@@ -33,11 +33,11 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        id_forma: {
+        formasIdforma: {
             type: dataTypes.INTEGER,
             allowNull: false
         },
-        id_marca: {
+        marcasIdmarca: {
             type: dataTypes.INTEGER,
             allowNull: false
         }
@@ -52,7 +52,15 @@ module.exports = (sequelize, dataTypes) => {
     products.associate = models => {
         products.belongsTo(models.colors, {
             as: "colores",
-            foreingKey: "colorIdColor"
+            foreingKey: "idcolor"
+        })
+        products.belongsTo(models.brands, {
+            as: "marcas",
+            foreingKey: "idmarca"
+        })
+        products.belongsTo(models.forms, {
+            as: "formas",
+            foreingKey: "idforma"
         })
     }
 
