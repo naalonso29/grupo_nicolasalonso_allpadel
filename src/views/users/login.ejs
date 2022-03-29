@@ -18,17 +18,38 @@
                     <h3>Email</h3>
                     <input type="email" name="email" id="email" class="campos">
 
-                    <h3>Contraseña</h3>
-                    <input type="password" name="password" id="password" class="campos">
+                    <% if (locals.erroremail && erroremail.email) { %>
+                        <p class="mensaje-error"><small>
+                            *
+                            <%= erroremail.email.msg %>
+                        </small></p>
+                        <% } %>
 
-                    <article class="checkbox">
-                        <input type="checkbox" name="recuerdame" id="">
-                        <p>Recuerdame</p>
-                    </article>
+                            <h3>Contraseña</h3>
+                            <input type="password" name="password" id="password" class="campos">
+
+                            <% if (locals.errorclave && errorclave.clave) { %>
+                                <p class="mensaje-error"><small>
+                                    *
+                                    <%= errorclave.clave.msg %>
+                                </small></p>
+                                <% } %>
+
+                                    <article class="checkbox">
+                                        <input type="checkbox" name="recuerdame" id="">
+                                        <p>Recuerdame</p>
+                                    </article>
+
+                                    <% if (locals.errors) { errors.forEach( error => { %>
+                                        <p class="lista-errores"><small>
+                                            *
+                                            <%= error.msg %>
+                                        </small></p>
+                                        <% }) }%>
 
 
-                    <button type="submit" class="boton">Iniciar Sesión</a></button>
-                    <button type="submit" class="botonReg"><a href="/users/register" class="a-boton">Registrarme</a></button>
+                                            <button type="submit" class="boton">Iniciar Sesión</a></button>
+                                            <button type="submit" class="botonReg"><a href="/users/register" class="a-boton">Registrarme</a></button>
                 </section>
             </form>
 

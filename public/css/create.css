@@ -65,6 +65,20 @@ form {
     align-content: center;
 }
 
+.lista-errores {
+    margin-top: 3vh;
+    list-style: none;
+    color: black;
+    font-family: 'Ubuntu', sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.mensaje-error {
+    color: black;
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .cargaImagen {
     display: flex;
     flex-direction: column;
@@ -128,6 +142,7 @@ form {
 .botones {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 20px;

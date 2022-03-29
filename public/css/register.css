@@ -49,6 +49,7 @@ form {
 
 .btnregistro {
     display: flex;
+    flex-direction: column;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -84,6 +85,20 @@ h1 {
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     font-size: 40px;
+}
+
+.lista-errores {
+    margin-top: 3vh;
+    list-style: none;
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.mensaje-error {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .boton {

@@ -2,6 +2,7 @@ const path = require('path');
 const product = require('../models/product')
 const fs = require('fs');
 const db = require('../../database/models');
+const { validationResult } = require('express-validator');
 
 const controller = {
     detalleProducto: (req, res) => {
@@ -129,66 +130,167 @@ const controller = {
     },
     crearProducto: (req, res) => {
 
-        let imagenAGuardar = "/img/x-producto.jpg"
-        if (req.file != undefined) {
-            imagenAGuardar = "/img/products/" + req.file.filename;
+        let formas, colores, marcas
+
+        let errors = validationResult(req)
+
+        if (errors.isEmpty()) {
+
+            if (req.file != undefined) {
+                if (((path.extname(req.file.filename)).toLowerCase() == ".jpg") || ((path.extname(req.file.filename)).toLowerCase() == ".jpeg") || ((path.extname(req.file.filename)).toLowerCase() == ".png") || ((path.extname(req.file.filename)).toLowerCase() == ".gif")) {
+
+                    imagenAGuardar = "/img/products/" + req.file.filename;
+
+                    db.products.create({
+                        nombre: req.body.nombre,
+                        precio: req.body.precio,
+                        descripcion: req.body.descripcion,
+                        stock: req.body.stock,
+                        imagen: imagenAGuardar,
+                        formasIdforma: req.body.forma,
+                        coloresIdcolor: req.body.color,
+                        marcasIdmarca: req.body.marca
+
+                    })
+
+                    res.redirect("/")
+
+                } else {
+                    fs.unlinkSync(path.resolve("public", "img", "products", req.file.filename))
+                    db.forms.findAll()
+                        .then((datos) => {
+                            formas = datos
+                            db.brands.findAll()
+                                .then((datos) => {
+                                    marcas = datos
+                                    db.colors.findAll()
+                                        .then((datos) => {
+                                            colores = datos
+                                            res.render(path.resolve(__dirname, "..", "views", "products", "create"), { errorimagen: { imagen: { msg: "Formato de imagen invalido" } }, formas: formas, colores: colores, marcas: marcas, usuarioLog: req.session.userLogged })
+                                        }).catch(error => res.send(error))
+                                }).catch(error => res.send(error))
+                        }).catch(error => res.send(error))
+                }
+                db.forms.findAll()
+                    .then((datos) => {
+                        formas = datos
+                        db.brands.findAll()
+                            .then((datos) => {
+                                marcas = datos
+                                db.colors.findAll()
+                                    .then((datos) => {
+                                        colores = datos
+                                        res.render(path.resolve(__dirname, "..", "views", "products", "create"), { errorimagen: { imagen: { msg: "No se cargo imagen" } }, formas: formas, colores: colores, marcas: marcas, usuarioLog: req.session.userLogged })
+                                    }).catch(error => res.send(error))
+                            }).catch(error => res.send(error))
+                    }).catch(error => res.send(error))
+            }
+        } else {
+            db.forms.findAll()
+                .then((datos) => {
+                    formas = datos
+                    db.brands.findAll()
+                        .then((datos) => {
+                            marcas = datos
+                            db.colors.findAll()
+                                .then((datos) => {
+                                    colores = datos
+                                    res.render(path.resolve(__dirname, "..", "views", "products", "create"), { errors: errors.array(), formas: formas, colores: colores, marcas: marcas, usuarioLog: req.session.userLogged })
+                                }).catch(error => res.send(error))
+                        }).catch(error => res.send(error))
+                }).catch(error => res.send(error))
         }
-
-        db.products.create({
-            nombre: req.body.nombre,
-            precio: req.body.precio,
-            descripcion: req.body.descripcion,
-            stock: req.body.stock,
-            imagen: imagenAGuardar,
-            forma: req.body.forma,
-            color: req.body.color,
-            marca: req.body.marca
-
-        })
-
-        res.redirect("/")
-
     },
     modificarProducto: (req, res) => {
 
         let imagenAGuardar
 
-        if (req.file != undefined) {
-            if (req.file.filename != "") {
-                imagenAGuardar = "/img/products/" + req.file.filename;
+        let formas, colores, marcas
 
+        let errors = validationResult(req)
+
+        if (errors.isEmpty()) {
+
+            if (req.file != undefined) {
+                if (((path.extname(req.file.filename)).toLowerCase() == ".jpg") || ((path.extname(req.file.filename)).toLowerCase() == ".jpeg") || ((path.extname(req.file.filename)).toLowerCase() == ".png") || ((path.extname(req.file.filename)).toLowerCase() == ".gif")) {
+                    imagenAGuardar = "/img/products/" + req.file.filename;
+
+                    db.products.update({
+                        nombre: req.body.nombre,
+                        precio: req.body.precio,
+                        descripcion: req.body.descripcion,
+                        stock: req.body.stock,
+                        imagen: imagenAGuardar,
+                        formasIdforma: req.body.forma,
+                        coloresIdcolor: req.body.color,
+                        marcasIdmarca: req.body.marca
+
+                    }, {
+                        where: { idproducto: req.params.id }
+                    })
+
+                    res.redirect("/products/")
+
+                } else {
+                    fs.unlinkSync(path.resolve("public", "img", "products", req.file.filename))
+                    db.products.findOne({
+                            where: { idproducto: req.params.id },
+                            attributes: ['idproducto', 'nombre', 'precio', 'descripcion', 'imagen', 'stock']
+                        })
+                        .then((producto) => {
+                            db.forms.findAll()
+                                .then((datos) => {
+                                    formas = datos
+                                    db.brands.findAll()
+                                        .then((datos) => {
+                                            marcas = datos
+                                            db.colors.findAll()
+                                                .then((datos) => {
+                                                    colores = datos
+                                                    return res.render(path.resolve(__dirname, "..", "views", "products", "modify"), { errorimagen: { imagen: { msg: "Formato de imagen invalido" } }, producto: producto, formas: formas, colores: colores, marcas: marcas, usuarioLog: req.session.userLogged })
+                                                }).catch(error => res.send(error))
+                                        }).catch(error => res.send(error))
+                                }).catch(error => res.send(error))
+                        }).catch(error => res.send(error))
+                }
+            } else {
                 db.products.update({
                     nombre: req.body.nombre,
                     precio: req.body.precio,
                     descripcion: req.body.descripcion,
                     stock: req.body.stock,
-                    imagen: imagenAGuardar,
-                    forma: req.body.forma,
-                    color: req.body.color,
-                    marca: req.body.marca
+                    formasIdforma: req.body.forma,
+                    coloresIdcolor: req.body.color,
+                    marcasIdmarca: req.body.marca
 
                 }, {
                     where: { idproducto: req.params.id }
                 })
+
+                res.redirect("/products/")
             }
+
         } else {
-            db.products.update({
-                nombre: req.body.nombre,
-                precio: req.body.precio,
-                descripcion: req.body.descripcion,
-                stock: req.body.stock,
-                forma: req.body.forma,
-                color: req.body.color,
-                marca: req.body.marca
-
-            }, {
-                where: { idproducto: req.params.id }
-            })
+            db.products.findOne({
+                    where: { idproducto: req.params.id },
+                    attributes: ['idproducto', 'nombre', 'precio', 'descripcion', 'imagen', 'stock']
+                })
+                .then((producto) => {
+                    db.forms.findAll()
+                        .then((datos) => {
+                            formas = datos
+                            db.brands.findAll()
+                                .then((datos) => {
+                                    marcas = datos
+                                    db.colors.findAll()
+                                        .then((datos) => {
+                                            colores = datos
+                                            return res.render(path.resolve(__dirname, "..", "views", "products", "modify"), { errors: errors.array(), producto: producto, formas: formas, colores: colores, marcas: marcas, usuarioLog: req.session.userLogged })
+                                        }).catch(error => res.send(error))
+                                }).catch(error => res.send(error))
+                        }).catch(error => res.send(error))
+                }).catch(error => res.send(error))
         }
-
-
-
-        res.redirect("/products/")
     },
     borrarProducto: (req, res) => {
 

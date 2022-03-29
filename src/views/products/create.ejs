@@ -58,11 +58,25 @@
                         <div class="file-select" id="src-file1">
                             <input type="file" name="imagen" aria-label="Archivo">
                         </div>
+                        <% if (locals.errorimagen && errorimagen.imagen) { %>
+                            <p class="mensaje-error"><small>
+                                *
+                                <%= errorimagen.imagen.msg %>
+                            </small></p>
+                            <% } %>
                     </section>
 
                     <section class="botones">
 
                         <button type="submit" class="boton">Crear Producto</a></button>
+                        <ul class="lista-errores">
+                            <% if (locals.errors) { errors.forEach( error => { %>
+                                <li><small>
+                                    *
+                                    <%= error.msg %>
+                                </small></li>
+                                <% }) }%>
+                        </ul>
 
                     </section>
 

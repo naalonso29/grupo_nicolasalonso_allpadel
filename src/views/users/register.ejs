@@ -12,7 +12,7 @@
 
             <h1>Registro</h1>
 
-            <form action="/users/register" method="post">
+            <form enctype="multipart/form-data" action="/users/register" method="post">
                 <section class="registro">
                     <section class="izq-campos">
                         <h3>Nombre</h3>
@@ -24,8 +24,15 @@
                         <h3>Email</h3>
                         <input type="email" name="email" id="email" class="campos">
 
-                        <h3>Contraseña</h3>
-                        <input type="password" name="password" id="password" class="campos">
+                        <% if (locals.erroremail && erroremail.email) { %>
+                            <p class="mensaje-error"><small>
+                                *
+                                <%= erroremail.email.msg %>
+                            </small></p>
+                            <% } %>
+
+                                <h3>Contraseña</h3>
+                                <input type="password" name="password" id="password" class="campos">
                     </section>
 
                     <section class="der-img">
@@ -33,11 +40,27 @@
                         <div class="file-select" id="src-file1">
                             <input type="file" name="imagen" aria-label="Archivo">
                         </div>
+
+                        <% if (locals.errorimagen && errorimagen.imagen) { %>
+                            <p class="mensaje-error"><small>
+                                *
+                                <%= errorimagen.imagen.msg %>
+                            </small></p>
+                            <% } %>
                     </section>
 
                     <section class="btnregistro">
                         <button type="submit" class="boton">Registrarme</button>
+                        <ul class="lista-errores">
+                            <% if (locals.errors) { errors.forEach( error => { %>
+                                <li><small>
+                                    *
+                                    <%= error.msg %>
+                                </small></li>
+                                <% }) }%>
+                        </ul>
                     </section>
+
 
                 </section>
 

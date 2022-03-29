@@ -5,6 +5,7 @@ const esAdmin = require('../middlewares/esAdmin')
 const sinLoguear = require('../middlewares/sinLoguear')
 const multer = require('multer');
 const path = require('path');
+const { body } = require('express-validator');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -17,6 +18,16 @@ const storage = multer.diskStorage({
         cb(null, nombreArchivo);
     }
 })
+
+let validarProducto = [
+    body('nombre').notEmpty().withMessage('Debe ingresar un nombre'),
+    body('nombre').isLength({ min: 5 }).withMessage('El nombre debe tener al menos 5 caracteres'),
+    body('descripcion').isLength({ min: 20 }).withMessage('La descripcion debe tener al menos 20 caracteres'),
+    body('stock').notEmpty().withMessage('Debe ingresar stock'),
+    body('stock').isInt().withMessage('Debe ingresar un dato valido en stock'),
+    body('precio').notEmpty().withMessage('Debe ingresar precio'),
+    body('precio').isInt().withMessage('Debe ingresar un dato valido en precio'),
+]
 
 const upload = multer({ storage })
 
@@ -34,9 +45,9 @@ router.get('/cart', sinLoguear, productController.carrito)
 
 router.get('/create', sinLoguear, esAdmin, productController.create)
 
-router.put('/:id', upload.single('imagen'), productController.modificarProducto)
+router.put('/:id', upload.single('imagen'), validarProducto, productController.modificarProducto)
 
-router.post('/create', upload.single('imagen'), productController.crearProducto)
+router.post('/create', upload.single('imagen'), validarProducto, productController.crearProducto)
 
 router.delete('/:id', productController.borrarProducto)
 

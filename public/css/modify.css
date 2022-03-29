@@ -135,6 +135,23 @@ main {
     justify-content: flex-end;
     align-items: center;
     margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.lista-errores {
+    margin-top: 3vh;
+    list-style: none;
+    color: black;
+    font-family: 'Ubuntu', sans-serif;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.mensaje-error {
+    color: black;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 h3 {

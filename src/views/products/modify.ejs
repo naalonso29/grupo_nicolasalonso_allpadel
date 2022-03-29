@@ -10,7 +10,7 @@
     <%- include("../partials/header.ejs") %>
 
         <main>
-            <form enctype="multipart/form-data" action="/products/<%= producto.id_producto %>?_method=PUT" method="post" class="frmCarga">
+            <form enctype="multipart/form-data" action="/products/<%= producto.idproducto %>?_method=PUT" method="post" class="frmCarga">
                 <section class="carga">
                     <section class="informacionProducto">
                         <h3>Nombre</h3>
@@ -23,7 +23,7 @@
                         <select name="marca" class="campos">
                 
                             <% for( let i = 0; i < marcas.length; i++ ) { %>
-                                <% if (producto.id_marca == marcas.id_marca) { %>
+                                <% if (producto.marcasIdmarca == marcas.idmarca) { %>
                                         <option value=<%= i+1 %> selected ><%= marcas[i].nombre %></option>
                                     <% } else { %>
                                         <option value=<%= i+1 %>><%= marcas[i].nombre %></option>
@@ -36,7 +36,7 @@
                         <select name="forma" class="campos">
                             
                             <% for( let i = 0; i < formas.length; i++ ) { %>
-                                <% if (producto.id_forma == formas.id_forma) { %>
+                                <% if (producto.formasIdforma == formas.idforma) { %>
                                         <option value=<%= i+1 %> selected ><%= formas[i].nombre %></option>
                                     <% } else { %>
                                         <option value=<%= i+1 %>><%= formas[i].nombre %></option>
@@ -49,7 +49,7 @@
                         <select name="color" class="campos">
                 
                             <% for( let i = 0; i < colores.length; i++ ) { %>
-                                <% if (producto.id_color == colores.id_color) { %>
+                                <% if (producto.coloresIdcolor == colores.idcolor) { %>
                                     <option value=<%= i+1 %> selected="selected"><%= colores[i].nombre %></option>
                                 <% } else { %>
                                     <option value=<%= i+1 %>><%= colores[i].nombre %></option>
@@ -70,15 +70,30 @@
                         <div class="file-select" id="src-file1">
                             <input type="file" name="imagen" aria-label="Archivo">
                         </div>
+                        <% if (locals.errorimagen && errorimagen.imagen) { %>
+                            <p class="mensaje-error"><small>
+                                *
+                                <%= errorimagen.imagen.msg %>
+                            </small></p>
+                            <% } %>
                     </section>
 
                     <section class="botones">
 
                         <button type="submit" class="boton guardar">Guardar Cambios</a></button>
             </form>
-            <form action="/products/<%= producto.id_producto %>?_method=DELETE" method="post" class="btnEliminar">
+            <form action="/products/<%= producto.idproducto %>?_method=DELETE" method="post" class="btnEliminar">
                 <button type="submit" class="boton">Eliminar Producto</button>
             </form>
+
+            <ul class="lista-errores">
+                <% if (locals.errors) { errors.forEach( error => { %>
+                    <li><small>
+                                            *
+                                            <%= error.msg %>
+                                        </small></li>
+                    <% }) }%>
+            </ul>
 
 
             </section>

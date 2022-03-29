@@ -87,6 +87,17 @@ h3 {
     margin-top: 3vh;
 }
 
+.mensaje-error {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.lista-errores {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 2vh;
+}
+
 .a-boton {
     text-decoration: none;
 }

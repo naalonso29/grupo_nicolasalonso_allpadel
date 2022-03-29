@@ -35,35 +35,51 @@ const controller = {
             })
             .then(datos => {
 
-                if (datos == undefined) {
+                let errors = validationResult(req)
 
-                    req.body.password = bcrypt.hashSync(req.body.password, 10);
+                if (errors.isEmpty()) {
 
-                    let imagenAGuardar = "/img/profiles/default.jpg"
-                    if (req.file != undefined) {
-                        imagenAGuardar = "/img/profiles/" + req.file.filename;
+                    if (datos == null) {
+
+                        req.body.password = bcrypt.hashSync(req.body.password, 10);
+
+
+                        if (req.file != undefined) {
+                            if (((path.extname(req.file.filename)).toLowerCase() == ".jpg") || ((path.extname(req.file.filename)).toLowerCase() == ".jpeg") || ((path.extname(req.file.filename)).toLowerCase() == ".png") || ((path.extname(req.file.filename)).toLowerCase() == ".gif")) {
+
+                                imagenAGuardar = "/img/profiles/" + req.file.filename;
+
+                                db.users.create({
+
+                                    nombre: req.body.nombre,
+                                    apellido: req.body.apellido,
+                                    email: req.body.email,
+                                    contrasenia: req.body.password,
+                                    imagen: imagenAGuardar,
+                                    tiposIdtipo: 2
+
+                                })
+
+                                res.redirect('/users/login')
+
+                            } else {
+                                fs.unlinkSync(path.resolve("public", "img", "profiles", req.file.filename))
+                                res.render(path.resolve(__dirname, "..", "views", "users", "register"), { errorimagen: { imagen: { msg: "Formato de imagen invalido" } }, usuarioLog: req.session.userLogged })
+                            }
+
+                        } else {
+                            res.render(path.resolve(__dirname, "..", "views", "users", "register"), { errorimagen: { imagen: { msg: "No se cargo imagen" } }, usuarioLog: req.session.userLogged })
+                        }
+
+                    } else {
+                        res.render(path.resolve(__dirname, "..", "views", "users", "register"), { erroremail: { email: { msg: "Email ya registrado" } }, usuarioLog: req.session.userLogged })
                     }
 
-                    db.users.create({
-
-                        nombre: req.body.nombre,
-                        apellido: req.body.apellido,
-                        email: req.body.email,
-                        contrasenia: req.body.password,
-                        imagen: imagenAGuardar,
-                        tiposIdtipo: 2
-
-                    })
-
-                    res.redirect('/users/login')
-
                 } else {
-                    res.send("ESTE MAIL YA EXISTE")
+                    res.render(path.resolve(__dirname, "..", "views", "users", "register"), { errors: errors.array(), usuarioLog: req.session.userLogged })
                 }
 
-
             })
-
     },
     validarLogin: (req, res) => {
 
@@ -78,7 +94,7 @@ const controller = {
 
                 if (errors.isEmpty()) {
 
-                    if (usuario.length != 0) {
+                    if (usuario != null) {
 
                         if (bcrypt.compareSync(req.body.password, usuario.contrasenia)) {
 
