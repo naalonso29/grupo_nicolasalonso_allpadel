@@ -18,43 +18,50 @@
                     <h3>Email</h3>
                     <input type="email" name="email" id="email" class="campos">
 
-                    <% if (locals.erroremail && erroremail.email) { %>
-                        <p class="mensaje-error"><small>
+                    <ul class="mensaje-error">
+                        <% if (locals.erroremail && erroremail.email) { %>
+                            <li><small>
                             *
                             <%= erroremail.email.msg %>
-                        </small></p>
-                        <% } %>
+                        </small></li>
+                            <% } %>
+                    </ul>
 
-                            <h3>Contraseña</h3>
-                            <input type="password" name="password" id="password" class="campos">
+                    <h3>Contraseña</h3>
+                    <input type="password" name="password" id="password" class="campos">
 
-                            <% if (locals.errorclave && errorclave.clave) { %>
-                                <p class="mensaje-error"><small>
+                    <ul class="mensaje-error" id="mensaje-error-pass">
+                        <% if (locals.errorclave && errorclave.clave) { %>
+                            <li><small>
                                     *
                                     <%= errorclave.clave.msg %>
-                                </small></p>
-                                <% } %>
+                                </small></li>
+                            <% } %>
+                    </ul>
 
-                                    <article class="checkbox">
-                                        <input type="checkbox" name="recuerdame" id="">
-                                        <p>Recuerdame</p>
-                                    </article>
+                    <article class="checkbox">
+                        <input type="checkbox" name="recuerdame" id="">
+                        <p>Recuerdame</p>
+                    </article>
 
-                                    <% if (locals.errors) { errors.forEach( error => { %>
-                                        <p class="lista-errores"><small>
-                                            *
-                                            <%= error.msg %>
-                                        </small></p>
-                                        <% }) }%>
+                    <ul class="lista-errores">
+                        <% if (locals.errors) { errors.forEach( error => { %>
+                            <li><small>
+                                                *
+                                                <%= error.msg %>
+                                            </small></li>
+                            <% }) }%>
+                    </ul>
 
 
-                                            <button type="submit" class="boton">Iniciar Sesión</a></button>
-                                            <button type="submit" class="botonReg"><a href="/users/register" class="a-boton">Registrarme</a></button>
+                    <button type="submit" class="boton">Iniciar Sesión</a></button>
+                    <button type="submit" class="botonReg"><a href="/users/register" class="a-boton">Registrarme</a></button>
                 </section>
             </form>
 
         </main>
         <%- include("../partials/footer.ejs") %>
+            <script src="/js/validacionesLogin.js"></script>
 </body>
 
 </html>

@@ -90,6 +90,7 @@ h3 {
 .mensaje-error {
     color: white;
     font-family: 'Ubuntu', sans-serif;
+    list-style: none;
 }
 
 .lista-errores {
