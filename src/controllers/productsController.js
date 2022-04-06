@@ -297,6 +297,64 @@ const controller = {
         db.products.destroy({ where: { idproducto: req.params.id } })
 
         res.redirect('/products/');
+    },
+    apiLista: (req, res) => {
+
+        db.products.findAll(
+            {attributes: ['idproducto', 'nombre', 'descripcion', "coloresIdcolor", "formasIdforma", "marcasIdmarca", "imagen"]}
+            )
+            .then( productos => {
+
+                let catForma = []
+                let red = 0, lag = 0, dia = 0
+
+                for(let i=0; i<productos.length; i++){
+                    let info = ({
+                        id: productos[i].idproducto, 
+                        name: productos[i].nombre, 
+                        descripcion: productos[i].descripcion,
+                        color: productos[i].coloresIdcolor,
+                        forma: productos[i].formasIdforma,
+                        marca: productos[i].marcasIdmarca,
+                        detail: "http://localhost:3000/api/products/" + productos[i].idproducto
+                    })
+
+                    if(productos[i].formasIdforma == 1){
+                        red++
+                    } else {
+                        if(productos[i].formasIdforma == 2){
+                            lag++
+                        }else{
+                            dia++
+                        }
+                    }
+
+                    productos[i] = info
+                }
+                
+                
+                catForma.push({"Redonda": red})
+                catForma.push({"Lagrima": lag})
+                catForma.push({"Diamante": dia})
+
+                res.json({
+                    count: productos.length,
+                    countByCategory: catForma,
+                    products: productos
+                })
+
+
+            }).catch(error => {res.send(error)})
+    },
+    apiDetalle: (req,res) => {
+        db.products.findOne({
+            where: { idproducto: req.params.id },
+            attributes: ['idproducto', 'nombre', 'precio', 'descripcion', 'imagen', 'stock'],
+            include: [{ association: "colores" }, { association: "marcas" }, { association: "formas" }]
+        })
+        .then(producto => {
+            res.json(producto)
+        }).catch(error => res.send(error))
     }
 
 }

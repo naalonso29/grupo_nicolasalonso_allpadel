@@ -9,6 +9,7 @@ const session = require('express-session');
 const rutasUsers = require("./routes/users")
 const rutasProductos = require('./routes/products');
 const rutaHome = require("./routes/index");
+const rutaApi = require("./routes/api");
 
 
 app.set("port", 3000);
@@ -29,5 +30,6 @@ app.use(method('_method'))
 
 //Direcciones
 app.use("/", rutaHome);
-app.use("/users", rutasUsers)
-app.use("/products", rutasProductos)
+app.use("/users", rutasUsers);
+app.use("/products", rutasProductos);
+app.use("/api", rutaApi);
