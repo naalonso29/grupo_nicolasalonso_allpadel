@@ -3,6 +3,7 @@ const app = express();
 const method = require('method-override')
 const path = require("path");
 const session = require('express-session');
+const cors = require('cors');
 
 
 //Modulos requeridos
@@ -12,11 +13,11 @@ const rutaHome = require("./routes/index");
 const rutaApi = require("./routes/api");
 
 
-app.set("port", 3000);
+app.set("port", 3001);
 app.set("view engine", "ejs");
 
 
-app.listen(process.env.PORT || 3000, () => console.log("Servidor Corriendo"));
+app.listen(process.env.PORT || 3001, () => console.log("Servidor Corriendo"));
 
 app.use(session({
     secret: "mensajeSecreto",
@@ -27,6 +28,7 @@ app.use(session({
 app.use(express.static(path.resolve(__dirname, '..', 'public')))
 app.use(express.urlencoded({ extended: false }))
 app.use(method('_method'))
+app.use(cors({ origin: "http://localhost:3000"}))
 
 //Direcciones
 app.use("/", rutaHome);

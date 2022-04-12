@@ -13,7 +13,7 @@
 @media (min-width: 1024px) {}
 
 main {
-    background-color: #EDEDED;
+    background-color: #686369;
     display: flex;
     width: 100%;
     justify-content: center;
@@ -68,14 +68,14 @@ form {
 .lista-errores {
     margin-top: 3vh;
     list-style: none;
-    color: black;
+    color: white;
     font-family: 'Ubuntu', sans-serif;
     justify-content: center;
     align-items: center;
 }
 
 .mensaje-error {
-    color: black;
+    color: white;
     font-family: 'Ubuntu', sans-serif;
 }
 
@@ -102,7 +102,7 @@ form {
 }
 
 .file-select::before {
-    background-color: #DC191B;
+    background-color: #0077B6;
     color: white;
     display: flex;
     justify-content: center;
@@ -130,13 +130,14 @@ form {
 .boton {
     height: 8vh;
     width: 18vw;
-    background-color: #DC191B;
+    background-color: #0077B6;
     color: white;
-    border: 1px solid #DC191B;
+    border: 1px solid #0077B6;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 15px;
     margin-top: 3vh;
+    border-radius: 15px;
 }
 
 .botones {
@@ -146,8 +147,10 @@ form {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    border-radius: 15px;
 }
 
 h3 {
     margin-top: 15px;
+    color:white
 }

@@ -1,19 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
 
-@media (min-width: 320px) and (max-width: 767px) {}
+@media (min-width: 320px) and (max-width: 767px) {
+    main form {
+        width: 100%;
+    }
+    .boton {
+        height: 8vh;
+        width: 50vw;
+    }
+    .perfil{
+        flex-direction: column;
+    }
+    .info-items li {
+        font-size: 15px;
+    }
+    .info{
+        width: 100%;
+    }
+    .imagen{
+        width: 100%;
+    }
+}
 
-@media (min-width: 768px) and (max-width: 1023px) {}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .boton {
+        height: 8vh;
+        width: 18vw;
+    }
+    .perfil{
+        flex-direction: row;
+    }
+    .info-items li {
+        font-size: 23px;
+    }
+    .info{
+        width: 50%;
+    }
+    .imagen{
+        width: 50%;
+    }
+}
 
-@media (min-width: 1024px) {}
+@media (min-width: 1024px) {
+    .boton {
+        height: 8vh;
+        width: 18vw;
+    }
+    .perfil{
+        flex-direction: row;
+    }
+    .info-items li {
+        font-size: 23px;
+    }
+    .info{
+        width: 50%;
+    }
+    .imagen{
+        width: 50%;
+    }
+}
 
 main {
-    background-color: #EDEDED;
+    background-color: #686369;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,36 +83,34 @@ main form {
 
 .info {
     display: flex;
-    width: 50%;
     align-items: center;
 }
 
 .perfil {
     display: flex;
-    border: 2px solid black;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px 1px black;
     width: 90%;
     margin-top: 15px;
     margin-bottom: 15px;
-    background-color: #DC191B;
+    background-color: #0077B6;
     padding: 8px;
 }
 
 .boton {
-    height: 8vh;
-    width: 18vw;
     background-color: #0f1618;
     color: white;
     border: 1px solid #0f1618;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Bebas', sans-serif;
     font-weight: bold;
     font-size: 15px;
     margin-top: 3vh;
+    border-radius: 15px;
 }
 
 .imagen {
     display: flex;
     flex-direction: column;
-    width: 50%;
     justify-content: center;
     align-items: center;
 }
@@ -79,6 +131,7 @@ main form {
 
 .file-select::before {
     background-color: #0f1618;
+    border-radius: 15px;
     color: white;
     display: flex;
     justify-content: center;
@@ -100,7 +153,7 @@ main form {
 
 #src-file1::before {
     content: 'Seleccionar Imagen';
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Bebas', sans-serif;
 }
 
 .info-items {
@@ -109,9 +162,9 @@ main form {
 
 .info-items li {
     list-style: none;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 30px;
+    font-family: 'Montserrat', sans-serif;
     margin-bottom: 20px;
+    color: white;
 }
 
 .btnGuardar {

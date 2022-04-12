@@ -1,19 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
 
-@media (min-width: 320px) and (max-width: 767px) {}
+@media (min-width: 320px) and (max-width: 767px) {
+    .producto{
+        flex-direction: column;
+    }
+    .der-info{
+        width: 100%;
+        padding: 0px 8px;
+    }
+    .izq-img{
+        width: 100%;
+    }
+    .boton {
+        height: 8vh;
+        width: 50vw;
+    }
+}
 
-@media (min-width: 768px) and (max-width: 1023px) {}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .producto{
+        flex-direction: row;
+    }
+    .der-info{
+        width: 50%;
+    }
+    .izq-img{
+        width: 50%;
+    }
+    .boton {
+        height: 8vh;
+        width: 18vw;
+    }
+}
 
-@media (min-width: 1024px) {}
+@media (min-width: 1024px) {
+    .producto{
+        flex-direction: row;
+    }
+    .der-info{
+        width: 50%;
+    }
+    .izq-img{
+        width: 50%;
+    }
+    .boton {
+        height: 8vh;
+        width: 18vw;
+    }
+}
 
 main {
-    background-color: #EDEDED;
+    background-color: #686369;
 }
 
 .producto {
@@ -24,7 +67,6 @@ main {
 
 .izq-img {
     display: flex;
-    width: 50%;
     justify-content: center;
     align-content: center;
 }
@@ -39,26 +81,27 @@ main {
 .der-info {
     display: flex;
     flex-direction: column;
-    width: 50%;
 }
 
 .der-info h1 {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Bebas', sans-serif;
     margin-top: 9vh;
     margin-bottom: 4vh;
     text-align: center;
     font-size: 45px;
+    color:white;
 }
 
 .precio-fav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Bebas', sans-serif;
     margin-top: 5vh;
     margin-bottom: 5vh;
     font-size: 45px;
     margin-right: 2vw;
+    color:white;
 }
 
 .precio-fav p {
@@ -72,8 +115,9 @@ main {
 .datos {
     margin-top: 3vh;
     margin-bottom: 3vh;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     height: 25vh;
+    color:white;
 }
 
 .datos li {
@@ -89,6 +133,7 @@ main {
     margin-right: 2vw;
     margin-top: 5vh;
     margin-bottom: 5vh;
+    color:white;
 }
 
 .carrito-compartir i {
@@ -96,19 +141,18 @@ main {
 }
 
 .boton {
-    height: 8vh;
-    width: 18vw;
-    background-color: #DC191B;
-    color: black;
-    border: 1px solid #DC191B;
-    font-family: 'Ubuntu', sans-serif;
+    background-color: #0077B6;
+    color: white;
+    border: 1px solid #0077B6;
+    font-family: 'Bebas', sans-serif;
     font-weight: bold;
     font-size: 15px;
+    border-radius: 15px;
 }
 
 a:link,
 a:visited,
 a:active {
     text-decoration: none;
-    color: black;
+    color:white;
 }

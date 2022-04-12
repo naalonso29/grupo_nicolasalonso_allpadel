@@ -147,7 +147,7 @@ const controller = {
                         id: usuarios[i].id, 
                         name: usuarios[i].nombre + " " + usuarios[i].apellido, 
                         email: usuarios[i].email, 
-                        detail: "http://localhost:3000/api/users/" + usuarios[i].id
+                        detail: "http://localhost:3001/api/users/" + usuarios[i].id
                     })
 
                     usuarios[i] = info
@@ -155,16 +155,18 @@ const controller = {
 
                 res.json({
                     count: usuarios.length,
-                    users: usuarios
+                    users: usuarios,
+                    status: 200
                 })
             }).catch(error => {res.send(error)})
     },
     apiDetalleUsuario: (req,res) => {
         db.users.findByPk(req.params.id,{attributes: ['id', 'nombre', 'apellido', 'email', 'imagen']})
             .then(usuario => {
-                res.json(
-                    usuario
-                )
+                res.json({
+                    usuario,
+                    status: 200
+                })
             }).catch(error => {res.send(error)})
     }
 }

@@ -3,6 +3,7 @@ const product = require('../models/product')
 const fs = require('fs');
 const db = require('../../database/models');
 const { validationResult } = require('express-validator');
+const sequelize = require('sequelize');
 
 const controller = {
     detalleProducto: (req, res) => {
@@ -316,7 +317,7 @@ const controller = {
                         color: productos[i].coloresIdcolor,
                         forma: productos[i].formasIdforma,
                         marca: productos[i].marcasIdmarca,
-                        detail: "http://localhost:3000/api/products/" + productos[i].idproducto
+                        detail: "http://localhost:3001/api/products/" + productos[i].idproducto
                     })
 
                     if(productos[i].formasIdforma == 1){
@@ -340,7 +341,8 @@ const controller = {
                 res.json({
                     count: productos.length,
                     countByCategory: catForma,
-                    products: productos
+                    products: productos,
+                    status: 200
                 })
 
 
@@ -353,10 +355,101 @@ const controller = {
             include: [{ association: "colores" }, { association: "marcas" }, { association: "formas" }]
         })
         .then(producto => {
-            res.json(producto)
+            res.json({
+                producto,
+                status: 200
+            })
         }).catch(error => res.send(error))
-    }
+    },
+    apiUltimoCreado: (req,res) =>{
 
+        db.products.findOne({
+            limit: 1,
+            order: [['idproducto', 'DESC']],
+            attributes: ['idproducto', 'nombre', 'precio', 'descripcion', 'imagen', 'stock']
+        })
+            .then(producto => {
+                res.json({
+                    producto,
+                    status: 200
+                })
+            }).catch(error => res.send(error))
+    },
+    apiTotalPorCategoria: (req,res) =>{
+        
+        let marcas, colores, formas, usuarios, productos 
+        
+        db.brands.count()
+            .then( data => {
+                marcas = data
+                db.colors.count()
+                .then( data => {
+                    colores = data
+                    db.forms.count()
+                        .then( data => {
+                            formas = data
+                            db.products.count()
+                                .then( data => {
+                                    productos = data
+                                    db.users.count()
+                                        .then( data => {
+                                            usuarios = data
+
+                                            res.json({
+                                                cantidadMarcas: marcas,
+                                                cantidadColores: colores,
+                                                cantidadFormas: formas,
+                                                cantidadProductos: productos,
+                                                cantidadUsuarios: usuarios
+                                            })
+
+                                            
+                                        }).catch(error => console.log(error))
+                                }).catch(error => console.log(error))
+                        }).catch(error => console.log(error))
+                }).catch(error => console.log(error))
+            }).catch(error => console.log(error))
+    
+    },
+    apiTotalPorFiltro: (req,res) =>{
+    
+        let colores,marcas,formas
+
+        let sql = "SELECT C.nombre, Cantidad FROM Colors C "+
+        "LEFT JOIN (Select coloresIdcolor, Count(1) as Cantidad FROM Products P GROUP BY p.coloresIdcolor) AS Tempo " +
+        "ON C.idcolor = Tempo.coloresIdcolor " +
+        "GROUP BY C.nombre"
+
+        let sql2 = "SELECT C.nombre, Cantidad FROM brands C "+
+        "LEFT JOIN (Select marcasIdmarca, Count(1) as Cantidad FROM Products P GROUP BY p.marcasIdmarca) AS Tempo "+
+        "ON C.idmarca = Tempo.marcasIdmarca "+
+        "GROUP BY C.nombre"
+
+        let sql3 ="SELECT C.nombre, Cantidad FROM forms C "+
+        "LEFT JOIN (Select formasIdforma, Count(1) as Cantidad FROM Products P GROUP BY p.formasIdforma) AS Tempo "+
+        "ON C.idforma = Tempo.formasIdforma "+
+        "GROUP BY C.nombre"
+
+        db.sequelize.query(sql, { type: db.sequelize.QueryTypes.SELECT })
+        .then(datos => {
+            colores = datos
+            db.sequelize.query(sql2, { type: db.sequelize.QueryTypes.SELECT })
+            .then(datos => {
+                marcas = datos
+                db.sequelize.query(sql3, { type: db.sequelize.QueryTypes.SELECT })
+                .then(datos => {
+                    formas = datos
+                    res.json({
+                        listaColores: colores,
+                        listaMarcas: marcas,
+                        listaFormas: formas
+                    })
+                }).catch(error => res.send(error))
+            }).catch(error => res.send(error))
+        }).catch(error => res.send(error))
+        
+    }
 }
 
 module.exports = controller;
+

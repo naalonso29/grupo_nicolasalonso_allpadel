@@ -10,7 +10,14 @@ router.get("/users/:id", usersController.apiDetalleUsuario);
 
 router.get("/products", productController.apiLista);
 
+router.get("/products/ultimo", productController.apiUltimoCreado);
+
+router.get("/products/totalcategorias", productController.apiTotalPorCategoria);
+
+router.get("/products/totalfiltros", productController.apiTotalPorFiltro);
+
 router.get("/products/:id", productController.apiDetalle);
+
 
 
 

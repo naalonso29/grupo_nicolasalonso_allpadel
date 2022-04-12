@@ -1,19 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
 
-@media (min-width: 320px) and (max-width: 767px) {}
+@media (min-width: 320px) and (max-width: 767px) {
+    .login{
+        width: 80%;
+    }
+    .boton {
+        height: 8vh;
+        width: 50vw;
+    }
 
-@media (min-width: 768px) and (max-width: 1023px) {}
+    .botonReg{
+        height: 8vh;
+        width: 50vw;
+    }
+}
 
-@media (min-width: 1024px) {}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .login{
+        width: 50%;
+    }
+    .boton {
+        height: 8vh;
+        width: 18vw;
+    }
+
+    .botonReg {
+        height: 8vh;
+        width: 18vw;
+    }
+}
+
+@media (min-width: 1024px) {
+    .login{
+        width: 30%;
+    }
+
+    .boton {
+        height: 8vh;
+        width: 18vw;
+    }
+
+    .botonReg {
+        height: 8vh;
+        width: 18vw;
+    }
+}
 
 main {
-    background-color: #EDEDED;
+    background-color: #686369;
     display: flex;
 }
 
@@ -27,32 +67,32 @@ form {
 .login {
     display: flex;
     flex-direction: column;
-    width: 30%;
     align-content: center;
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
     margin: 20px;
-    border: 1px solid #0f1618;
+    border-radius: 15px;
+    box-shadow: 0px 0px 5px 1px black;
     padding: 10px;
-    background-color: #DC191B;
+    background-color: #0077B6;
 }
 
 h1 {
     text-align: center;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Bebas', sans-serif;
     font-size: 40px;
 }
 
 h3 {
     margin-top: 5vh;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Bebas', sans-serif;
     font-size: 12px;
 }
 
 .checkbox {
     margin-top: 5vh;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Bebas', sans-serif;
     font-size: 15px;
     display: flex;
     flex-wrap: wrap;
@@ -65,42 +105,42 @@ h3 {
 }
 
 .boton {
-    height: 8vh;
-    width: 18vw;
     background-color: #0f1618;
     color: white;
     border: 1px solid #0f1618;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Bebas', sans-serif;
     font-weight: bold;
     font-size: 15px;
     margin-top: 3vh;
+    border-radius: 15px;
 }
 
 .botonReg {
-    height: 8vh;
-    width: 18vw;
     background-color: #EDEDED;
     border: 1px solid #EDEDED;
-    font-family: 'Ubuntu', sans-serif;
+    border-radius: 15px;
+    font-family: 'Bebas', sans-serif;
     font-weight: bold;
     font-size: 15px;
     margin-top: 3vh;
+    color: black;
 }
 
 .mensaje-error {
     color: white;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Bebas', sans-serif;
     list-style: none;
 }
 
 .lista-errores {
     color: white;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Bebas', sans-serif;
     margin-top: 2vh;
 }
 
 .a-boton {
     text-decoration: none;
+    color: black;
 }
 
 .campos {
