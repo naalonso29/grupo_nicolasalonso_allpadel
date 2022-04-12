@@ -54,7 +54,7 @@
                     </section>
 
                     <section class="cargaImagen">
-                        <img src="/img/profiles/default.jpg" id="preview" alt="">
+                        <img src="/img/x-producto.jpg" id="preview" alt="">
                         <div class="file-select" id="src-file1">
                             <input type="file" id="file" name="imagen" aria-label="Archivo">
                         </div>
@@ -92,9 +92,9 @@
 
                     <section class="FiltroImagen">
                         <section class="cargaImagenFiltro">
-                            <img src="/img/x-producto.jpg" id="preview" alt="">
+                            <img src="/img/x-producto.jpg" id="previewMarca" alt="">
                             <div class="file-select" id="src-file1">
-                                <input type="file" id="file" name="imagenMarca" aria-label="Archivo">
+                                <input type="file" id="fileMarca" name="imagenMarca" aria-label="Archivo">
                             </div>
                             <% if (locals.errorimagen && errorimagen.imagen) { %>
                                 <p class="mensaje-error"><small>
@@ -121,9 +121,9 @@
 
                     <section class="FiltroImagen">
                         <section class="cargaImagenFiltro">
-                            <img src="/img/x-producto.jpg" id="preview" alt="">
+                            <img src="/img/x-producto.jpg" id="previewColor" alt="">
                             <div class="file-select" id="src-file1">
-                                <input type="file" id="file" name="imagenColor" aria-label="Archivo">
+                                <input type="file" id="fileColor" name="imagenColor" aria-label="Archivo">
                             </div>
                             <% if (locals.errorimagen && errorimagen.imagen) { %>
                                 <p class="mensaje-error"><small>
@@ -145,6 +145,7 @@
 
         <%- include("../partials/footer.ejs") %>
             <script src="/js/validacionesProductos.js"></script>
+            <script src="/js/previewImagen.js"></script>
 </body>
 
 </html>
