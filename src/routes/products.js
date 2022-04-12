@@ -49,6 +49,10 @@ router.put('/:id', upload.single('imagen'), validarProducto, productController.m
 
 router.post('/create', upload.single('imagen'), validarProducto, productController.crearProducto)
 
+router.post('/createMarca', upload.single('imagenMarca'), productController.crearMarca)
+
+router.post('/createColor', upload.single('imagenColor'), productController.crearColor)
+
 router.delete('/:id', productController.borrarProducto)
 
 module.exports = router;

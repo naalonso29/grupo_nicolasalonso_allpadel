@@ -19,9 +19,10 @@ main {
     justify-content: center;
     align-items: center;
     font-family: 'Ubuntu', sans-serif;
+    flex-direction: column;
 }
 
-form {
+.formCreate {
     display: flex;
     flex-wrap: wrap;
     width: 80%;
@@ -154,3 +155,76 @@ h3 {
     margin-top: 15px;
     color:white
 }
+.nuevoFiltro{
+    height: 18vh;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-content: center;
+}
+
+.cargaImagenFiltro {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+}
+
+.camposFiltro {
+    width: 90%;
+    max-height: 70px;
+    padding: .5rem;
+    border-radius: 6px;
+    border: 1px solid black;
+    outline: none;
+}
+
+.cargaImagenFiltro img {
+    width: 70%;
+    height: auto;
+    max-height: 100px;
+    border-radius: 6px;
+    object-fit: cover;
+    padding: 15px;
+}
+
+.botonFiltro {
+    height: 8vh;
+    width: 65%;
+    background-color: #0077B6;
+    color: white;
+    border: 1px solid #0077B6;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 3vh;
+    border-radius: 15px;
+}
+
+
+.FiltroInput{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.FiltroImagen{
+    display: flex;
+    width: 40%;
+}
+
+.FiltroBoton{
+    display: flex;
+    width: 30%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nombreFiltro{
+    color:white;
+}
+
+

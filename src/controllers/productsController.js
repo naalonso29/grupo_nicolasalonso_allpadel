@@ -297,7 +297,27 @@ const controller = {
 
         db.products.destroy({ where: { idproducto: req.params.id } })
 
-        res.redirect('/products/');
+        res.redirect('/');
+    },
+    crearMarca: (req, res) => {
+
+            db.brands.create({
+                idmarca: 5,
+                nombre: req.body.nombreMarca,
+                imagen: "/img/products/" + req.file.filename
+            }).catch(error => res.send(error))
+
+       res.redirect('/products/create');
+    },
+    crearColor: (req, res) => {
+        
+            db.colors.create({
+                idcolor: 6,
+                nombre: req.body.nombreColor,
+                imagen: "/img/products/" + req.file.filename
+            }).catch(error => res.send(error))
+
+       res.redirect('/products/create');
     },
     apiLista: (req, res) => {
 

@@ -3,33 +3,41 @@
         <section class="secListados">
             <h3>Categorias</h3>
             <ul class="listaMenu">
-                <li><a href="/products">Paletas</a></li>
-                <li><a href="/products/lista/marcas">Marcas</a></li>
-                <li><a href="/products/lista/formas">Formas</a></li>
-                <li><a href="/products/lista/colores">Colores</a></li>
+                <li class="itemFooter"><a href="/products">Paletas</a></li>
+                <li class="itemFooter"><a href="/products/lista/marcas">Marcas</a></li>
+                <li class="itemFooter"><a href="/products/lista/formas">Formas</a></li>
+                <li class="itemFooter"><a href="/products/lista/colores">Colores</a></li>
             </ul>
         </section>
         <section class="secListados">
             <h3>Contacto</h3>
             <ul class="listaMenu">
-                <li><a href="">Ayuda</a></li>
-                <li><a href="/users/profile">Mi cuenta</a></li>
-                <li><a href="">Comprar</a></li>
+                <li class="itemFooter"><a href="">Ayuda</a></li>
+                <li class="itemFooter"><a href="/users/profile">Mi cuenta</a></li>
+                <li class="itemFooter"><a href="">Comprar</a></li>
             </ul>
         </section>
     </section>
     <section class="secDerecho">
-        <section class="secAcercaDe">
-            <h3>Administradores</h3>
-            <ul class="listaMenu">
-                <li><a href="/products/create">Crear Producto</a></li>
-            </ul>
-        </section>
+        <% if (usuarioLog != undefined) { %>
+            <% if (usuarioLog.esAdmin == 1) { %>
+                <section class="secAcercaDe">
+                    <h3>Administradores</h3>
+                    <ul class="listaMenu">
+                        <li class="itemFooter"><a href="/products/create">Crear Producto</a></li>
+                        <li class="itemFooter"><a href="/users/listadeusuarios">Lista Usuarios</a></li>
+                    </ul>
+                </section>
+            <% } %>    
+        <% } %>
+        <% if ((usuarioLog == undefined) || (usuarioLog.esAdmin == 2)) { %>
+            <h3>Nuestras Redes</h3>
+        <% } %>
         <section class="secRedes">
             <ul class="listaRedes">
-                <li><i class="fab fa-instagram"></i></li>
-                <li><i class="fab fa-twitter"></i></li>
-                <li><i class="fab fa-facebook-square"></i></li>
+                <li class="itemFooter"><i class="fab fa-instagram"></i></li>
+                <li class="itemFooter"><i class="fab fa-twitter"></i></li>
+                <li class="itemFooter"><i class="fab fa-facebook-square"></i></li>
             </ul>
         </section>
     </section>

@@ -6,6 +6,7 @@ const multer = require('multer');
 const { body } = require('express-validator');
 const estaLogueado = require('../middlewares/estaLogueado')
 const sinLoguear = require('../middlewares/sinLoguear')
+const esAdmin = require('../middlewares/esAdmin')
 
 let validacionesLogin = [
     body('email').notEmpty().withMessage('Debe ingresar un email'),
@@ -39,6 +40,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
+router.get("/listadeusuarios", sinLoguear, esAdmin, usersController.lista)
+
 router.get("/login", estaLogueado, usersController.login)
 
 router.post("/login", validacionesLogin, usersController.validarLogin);
@@ -52,5 +55,7 @@ router.get('/profile', sinLoguear, usersController.profile)
 router.get('/cierre', usersController.cerrarSesion)
 
 router.put("/profile", upload.single('imagen'), usersController.actualizarPerfil);
+
+router.put("/cambiartipo/:id/:tipo", usersController.actualizarTipoPerfil)
 
 module.exports = router;

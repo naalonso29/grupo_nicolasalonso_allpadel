@@ -25,7 +25,16 @@
                                 <p>$
                                     <%= producto.precio %>
                                 </p>
-                                <a href="/products/edit/<%= producto.idproducto %>"><i class="fas fa-edit"></i></a>
+                                <% if ((usuarioLog != undefined)&&(usuarioLog.esAdmin == 1)) { %>
+                                    <div class="detailA">
+                                        <a href="/products/edit/<%= producto.idproducto %>"><i class="fas fa-edit"></i></a>
+                                        <form action="/products/<%= producto.idproducto %>?_method=DELETE" method="post">
+                                            <button type="submit" class="botonBorrar"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </div>
+                                <% } %>
+
+
                             </article>
 
                             <ul class="datos">

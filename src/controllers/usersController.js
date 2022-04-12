@@ -14,6 +14,16 @@ const controller = {
     register: (req, res) => {
         res.render(path.resolve(__dirname, "..", "views", "users", "register"), { usuarioLog: req.session.userLogged })
     },
+    lista: (req, res) => {
+        
+        db.users.findAll({
+            attributes: ['id','nombre', 'apellido', 'email', 'imagen'],
+            include: [{ association: "tipos" }]
+        }).then(datos => {
+            res.render(path.resolve(__dirname, "..", "views", "users", "lista"), { usuarios: datos, usuarioLog: req.session.userLogged })
+        })
+    
+    },
     profile: (req, res) => {
 
         db.users.findOne({
@@ -117,6 +127,25 @@ const controller = {
 
 
     },
+    actualizarTipoPerfil: (req, res) => {
+
+        if(req.params.tipo == 1){
+            db.users.update({
+                tiposIdtipo: 2
+            }, {
+                where: { id: req.params.id }
+            })
+        }else{
+            db.users.update({
+                tiposIdtipo: 1
+            }, {
+                where: { id: req.params.id }
+            })
+        }
+
+        res.redirect("/users/listadeusuarios")
+
+    },
     actualizarPerfil: (req, res) => {
 
         if (req.file != undefined) {
@@ -129,7 +158,7 @@ const controller = {
             })
         }
 
-        res.redirect("/users/profile")
+        res.redirect("/")
 
     },
     cerrarSesion: (req, res) => {

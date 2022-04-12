@@ -10,7 +10,7 @@
     <%- include("../partials/header.ejs") %>
 
         <main>
-            <form enctype="multipart/form-data" action="/products/create" method="post">
+            <form enctype="multipart/form-data" action="/products/create" method="post" class="formCreate">
                 <section class="carga">
                     <section class="informacionProducto">
                         <h3>Nombre</h3>
@@ -54,9 +54,9 @@
                     </section>
 
                     <section class="cargaImagen">
-                        <img src="/img/profiles/default.jpg" alt="">
+                        <img src="/img/profiles/default.jpg" id="preview" alt="">
                         <div class="file-select" id="src-file1">
-                            <input type="file" name="imagen" aria-label="Archivo">
+                            <input type="file" id="file" name="imagen" aria-label="Archivo">
                         </div>
                         <% if (locals.errorimagen && errorimagen.imagen) { %>
                             <p class="mensaje-error"><small>
@@ -82,6 +82,65 @@
 
                 </section>
             </form>
+            <form  enctype="multipart/form-data" action="/products/createMarca" method="post" class="formCreate">
+                <section class="nuevoFiltro">
+
+                    <section class="FiltroInput">
+                        <h3 class="nombreFiltro">Nombre</h3>
+                        <input type="text" name="nombreMarca" id="nombre" class="camposFiltro">
+                    </section>
+
+                    <section class="FiltroImagen">
+                        <section class="cargaImagenFiltro">
+                            <img src="/img/x-producto.jpg" id="preview" alt="">
+                            <div class="file-select" id="src-file1">
+                                <input type="file" id="file" name="imagenMarca" aria-label="Archivo">
+                            </div>
+                            <% if (locals.errorimagen && errorimagen.imagen) { %>
+                                <p class="mensaje-error"><small>
+                                    *
+                                    <%= errorimagen.imagen.msg %>
+                                </small></p>
+                                <% } %>
+                        </section>
+                    </section>
+
+                    <section class="FiltroBoton">
+                        <button type="submit" class="botonFiltro">Crear Marca</a></button>
+                    </section>    
+
+                </section>
+            </form>
+            <form  enctype="multipart/form-data" action="/products/createColor" method="post" class="formCreate">
+                <section class="nuevoFiltro">
+
+                    <section class="FiltroInput">
+                        <h3 class="nombreFiltro">Nombre</h3>
+                        <input type="text" name="nombreColor" id="nombre" class="camposFiltro">
+                    </section>
+
+                    <section class="FiltroImagen">
+                        <section class="cargaImagenFiltro">
+                            <img src="/img/x-producto.jpg" id="preview" alt="">
+                            <div class="file-select" id="src-file1">
+                                <input type="file" id="file" name="imagenColor" aria-label="Archivo">
+                            </div>
+                            <% if (locals.errorimagen && errorimagen.imagen) { %>
+                                <p class="mensaje-error"><small>
+                                    *
+                                    <%= errorimagen.imagen.msg %>
+                                </small></p>
+                                <% } %>
+                        </section>
+                    </section>
+
+                    <section class="FiltroBoton">
+                        <button type="submit" class="botonFiltro">Crear Color</a></button>
+                    </section>    
+
+                </section>
+            </form>
+
         </main>
 
         <%- include("../partials/footer.ejs") %>

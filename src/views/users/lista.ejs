@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+        <link href="/css/lista.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/header.ejs") %>
+        <main>
+            <% for( let i = 0; i < usuarios.length; i++ ) { %>
+                
+                    <section class="itemListaUsuarios">
+
+                        <img src=<%= usuarios[i].imagen %>  alt="fotoperfil">
+    
+                        <div class="nombreEmail">
+                            <p><%= usuarios[i].nombre %> <%= usuarios[i].apellido %></p>
+                            <p><%= usuarios[i].email %></p>
+                        </div>
+    
+                        <p class="tipoUsuario">Tipo Usuario: <%= usuarios[i].tipos.nombre %></p>
+
+                        <% if (usuarios[i].id != 1) { %>
+                            <form action="/users/cambiartipo/<%= usuarios[i].id %>/<%= usuarios[i].tipos.idtipo %>?_method=PUT" method="post" class="formBoton">
+                                <% if (usuarios[i].tipos.idtipo == 1) { %>
+                                    <button type="submit" class="botonCambiar">Cambiar a Comprador</button>
+                                    <% } else { %> 
+                                        <% if (usuarios[i].tipos.idtipo == 2) { %>   
+                                            <button type="submit" class="botonCambiar">Cambiar a Administrador</button>
+                                        <% } %> 
+                                <% } %> 
+                            </form>
+                        <% } %>
+
+                    </section>
+            <% } %>
+        </main>
+        <%- include("../partials/footer.ejs") %>
+</body>
+
+</html>

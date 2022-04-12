@@ -31,9 +31,9 @@
                         </ul>
                     </section>
                     <section class="imagen">
-                        <img src="<%= usuario.imagen %>" alt="">
+                        <img src="<%= usuario.imagen %>" id="preview" alt="">
                         <div class="file-select" id="src-file1">
-                            <input type="file" name="imagen" aria-label="Archivo">
+                            <input type="file" id="file" name="imagen" aria-label="Archivo">
                         </div>
                     </section>
                 </section>
@@ -46,6 +46,7 @@
             </form>
         </main>
         <%- include("../partials/footer.ejs") %>
+        <script src="/js/previewImagen.js"></script>
 </body>
 
 </html>

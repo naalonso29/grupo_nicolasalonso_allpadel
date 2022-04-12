@@ -140,6 +140,11 @@ main {
     font-size: 30px;
 }
 
+.botonBorrar{
+    background-color: transparent;
+    color: white;
+}
+
 .boton {
     background-color: #0077B6;
     color: white;
@@ -150,7 +155,7 @@ main {
     border-radius: 15px;
 }
 
-a:link,
+.detailA a:link,
 a:visited,
 a:active {
     text-decoration: none;

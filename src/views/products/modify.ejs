@@ -66,9 +66,9 @@
                         <input type="text" name="stock" id="stock" class="campos" value="<%= producto.stock %>">
                     </section>
                     <section class="cargaImagen">
-                        <img src="<%= producto.imagen %>" alt="">
+                        <img src="<%= producto.imagen %>" id="preview" alt="">
                         <div class="file-select" id="src-file1">
-                            <input type="file" name="imagen" aria-label="Archivo">
+                            <input type="file" id="file" name="imagen" aria-label="Archivo">
                         </div>
                         <% if (locals.errorimagen && errorimagen.imagen) { %>
                             <p class="mensaje-error"><small>
@@ -81,9 +81,6 @@
                     <section class="botones">
 
                         <button type="submit" class="boton guardar">Guardar Cambios</a></button>
-            </form>
-            <form action="/products/<%= producto.idproducto %>?_method=DELETE" method="post" class="btnEliminar">
-                <button type="submit" class="boton">Eliminar Producto</button>
             </form>
 
             <ul class="lista-errores">
